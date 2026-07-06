@@ -1,0 +1,233 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.header {
+  margin-bottom: 8px;
+}
+.title {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--color-ink);
+  margin-bottom: 4px;
+}
+.subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-grey);
+}
+
+.card {
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  overflow: hidden;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 13px;
+}
+
+.table th {
+  text-align: left;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--color-line);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-grey);
+  background: rgba(250, 248, 244, 0.4);
+}
+
+.table td {
+  padding: 20px;
+  border-bottom: 1px solid var(--color-line);
+  color: var(--color-ink);
+  vertical-align: middle;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.fw500 {
+  font-weight: 500;
+}
+.dateCell {
+  color: var(--color-grey);
+  font-size: 12px;
+}
+
+.clientInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.clientName {
+  font-weight: 500;
+}
+.clientContact {
+  font-size: 11px;
+  color: var(--color-grey);
+  font-family: var(--font-sans);
+}
+
+.rightAlign {
+  text-align: right !important;
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 10px;
+  border-radius: 4px;
+  background: #f0f0f0;
+  color: var(--color-ink-soft);
+}
+.badgeGold {
+  background: rgba(212, 175, 55, 0.1);
+  color: var(--color-gold);
+}
+.badgeGreen {
+  background: rgba(34, 139, 34, 0.1);
+  color: #1e7a1e;
+}
+.badgeRed {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+.badgeWait {
+  background: rgba(0, 0, 0, 0.04);
+  color: var(--color-ink);
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.btnAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  border: 1px solid var(--color-line);
+  background: var(--color-white);
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.btnAction:hover {
+  background: var(--color-ink);
+  color: var(--color-cream);
+  border-color: var(--color-ink);
+}
+
+.btnDanger:hover {
+  background: #dc3545;
+  color: white;
+  border-color: #dc3545;
+}
+
+.btnIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: transparent;
+  color: var(--color-grey);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.btnIcon:hover {
+  color: var(--color-ink);
+}
+
+.empty {
+  text-align: center;
+  color: var(--color-grey);
+  padding: 40px !important;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-grey);
+}
+
+@media (max-width: 640px) {
+  .tableWrapper {
+    overflow-x: visible;
+  }
+  .table, .table thead, .table tbody, .table tr, .table th, .table td {
+    display: block;
+  }
+  .table thead {
+    display: none;
+  }
+  .table tr {
+    margin-bottom: 16px;
+    border: 1px solid var(--color-line);
+    border-radius: 8px;
+    padding: 12px;
+    background: var(--color-white);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  }
+  .table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-line);
+    padding: 12px 0;
+    text-align: right;
+  }
+  .table td:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .table td::before {
+    content: attr(data-label);
+    font-family: var(--font-sans);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-grey);
+    margin-right: 16px;
+    text-align: left;
+    font-weight: 500;
+  }
+  .clientInfo {
+    align-items: flex-end;
+  }
+}

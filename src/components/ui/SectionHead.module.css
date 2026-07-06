@@ -1,0 +1,42 @@
+.head {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 16px;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(30px, 4.5vw, 50px);
+  font-weight: 500;
+  color: var(--color-ink);
+  line-height: 1.15;
+}
+
+.title :global(em),
+.title i {
+  font-style: italic;
+}
+
+.sub {
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--color-grey);
+  margin: 14px auto 0;
+  max-width: 460px;
+  line-height: 1.6;
+}
+
+.light .title {
+  color: var(--color-cream);
+}
+.light .sub {
+  color: var(--color-ink-soft);
+}

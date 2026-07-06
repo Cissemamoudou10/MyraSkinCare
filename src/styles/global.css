@@ -1,0 +1,100 @@
+/* ============================================================
+   MYRA SKIN CARE — Design tokens & styles globaux
+   Palette, typographies et constantes validées par la cliente.
+   Modifier ici se répercute sur tout le site.
+   ============================================================ */
+
+:root {
+  /* Couleurs */
+  --color-ink: #0a0a0a;
+  --color-cream: #faf8f4;
+  --color-white: #ffffff;
+  --color-gold: #b08d57;
+  --color-grey: #6b6b6b;
+  --color-line: #e4dfd6;
+  --color-ink-soft: #c9c4ba;
+
+  /* Typographies */
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-body: "EB Garamond", Georgia, serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Rythme / espacements */
+  --header-height: 80px;
+  --maxw: 1200px;
+  --maxw-narrow: 1100px;
+
+  /* 
+    ============================================================
+    BREAKPOINTS (Documentation)
+    ============================================================
+    Mobile: <= 640px (@media (max-width: 640px))
+    Tablette: <= 1024px (@media (max-width: 1024px))
+    Desktop étroit: <= 1200px (@media (max-width: 1200px))
+    ============================================================
+  */
+
+  /* Transitions */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast: all 0.2s ease-in-out;
+}
+
+/* Reset léger */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: inherit;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-cream);
+}
+
+/* Utilitaires de conteneur */
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.container-narrow {
+  max-width: var(--maxw-narrow);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 640px) {
+  .container,
+  .container-narrow {
+    padding: 0 22px;
+  }
+}

@@ -1,0 +1,28 @@
+.page {
+  padding: calc(var(--header-height) + 100px) 0 140px;
+  text-align: center;
+  min-height: 60vh;
+}
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 20px;
+}
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 500;
+  color: var(--color-ink);
+  margin-bottom: 20px;
+}
+.text {
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--color-grey);
+  max-width: 460px;
+  margin: 0 auto;
+}

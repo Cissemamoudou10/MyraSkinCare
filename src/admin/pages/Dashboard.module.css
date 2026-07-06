@@ -1,0 +1,221 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.header {
+  margin-bottom: 8px;
+}
+.title {
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--color-ink);
+  margin-bottom: 4px;
+}
+.subtitle {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--color-grey);
+}
+
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.kpiCard {
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.kpiHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.kpiLabel {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-grey);
+}
+.kpiIcon {
+  color: var(--color-gold);
+}
+
+.kpiValue {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  color: var(--color-ink);
+}
+
+.kpiHint {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--color-ink-soft);
+}
+
+.mainGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .mainGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.chartCard, .recentCard {
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.cardTitle {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  margin-bottom: 24px;
+}
+.recentCard .cardTitle {
+  margin-bottom: 0;
+}
+
+.cardLink {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink-soft);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s;
+}
+.cardLink:hover {
+  color: var(--color-ink);
+  border-color: var(--color-ink);
+}
+
+.chartWrapper {
+  height: 300px;
+  width: 100%;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-body);
+  font-size: 13px;
+}
+
+.table th {
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-line);
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-grey);
+}
+
+.table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--color-line);
+  color: var(--color-ink);
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.fw500 {
+  font-weight: 500;
+}
+
+.empty {
+  text-align: center;
+  color: var(--color-grey);
+  padding: 32px !important;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-grey);
+}
+
+@media (max-width: 640px) {
+  .tableWrapper {
+    overflow-x: visible;
+  }
+  .table, .table thead, .table tbody, .table tr, .table th, .table td {
+    display: block;
+  }
+  .table thead {
+    display: none;
+  }
+  .table tr {
+    margin-bottom: 12px;
+    border: 1px solid var(--color-line);
+    border-radius: 8px;
+    padding: 12px;
+    background: var(--color-white);
+  }
+  .table td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-line);
+    padding: 8px 0;
+    text-align: right;
+  }
+  .table td:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .table td::before {
+    content: attr(data-label);
+    font-family: var(--font-sans);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-grey);
+    margin-right: 12px;
+    text-align: left;
+    font-weight: 500;
+  }
+}

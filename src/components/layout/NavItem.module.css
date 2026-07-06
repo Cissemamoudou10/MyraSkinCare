@@ -1,0 +1,127 @@
+.wrap {
+  position: relative;
+}
+
+.label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 0;
+  white-space: nowrap;
+}
+
+.caret {
+  font-size: 8px;
+  color: var(--color-gold);
+  transition: transform 0.3s ease;
+}
+.caretOpen {
+  transform: rotate(180deg);
+}
+
+.panel {
+  position: absolute;
+  top: 100%;
+  background: var(--color-cream);
+  border: 1px solid var(--color-line);
+  box-shadow: 0 18px 50px rgba(10, 10, 10, 0.08);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 40;
+}
+.panel.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.alignCenter {
+  left: 50%;
+  transform: translate(-50%, 8px);
+}
+.alignCenter.open {
+  transform: translate(-50%, 0);
+}
+.alignRight {
+  right: 0;
+  transform: translateY(8px);
+}
+.alignRight.open {
+  transform: translateY(0);
+}
+
+/* Sous-menu simple */
+.panel:not(.mega) {
+  padding: 14px 0;
+}
+.panel:not(.mega) .links {
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+}
+.panel:not(.mega) .sublink {
+  padding: 9px 24px;
+}
+
+/* Méga-menu (avec images) */
+.mega {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 26px;
+  padding: 22px;
+}
+.mega .links {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  justify-content: center;
+}
+.mega .sublink {
+  padding: 8px;
+}
+
+.sublink {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--color-grey);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+.sublink:hover {
+  color: var(--color-ink);
+}
+
+.features {
+  display: flex;
+  gap: 14px;
+}
+.feature {
+  text-decoration: none;
+  width: 150px;
+}
+.featureImg {
+  width: 150px;
+  height: 110px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  background: var(--color-white);
+}
+.featureImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.featureTitle {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}

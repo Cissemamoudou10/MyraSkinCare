@@ -1,0 +1,67 @@
+.page {
+  padding: calc(var(--header-height) + 60px) 0 100px;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-grey);
+  margin-bottom: 40px;
+}
+.sep { color: var(--color-line); }
+.current { color: var(--color-ink); }
+
+.head {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 16px;
+}
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(34px, 5vw, 56px);
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+.pill {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 1px solid var(--color-line);
+  background: transparent;
+  color: var(--color-ink);
+  transition: all 0.3s ease;
+}
+.pillOn {
+  border-color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-cream);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 80px 48px;
+}
