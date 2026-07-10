@@ -79,7 +79,7 @@ export default function KitDetail() {
     .map(p => p.photo)
     .filter(Boolean)
     .slice(0, 4)
-    .map(photo => photo.startsWith("http") ? photo : `http://localhost:4000${photo}`);
+    .map(photo => photo.startsWith("http") ? photo : `${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:4000'}${photo}`);
 
   return (
     <div className={styles.page}>
@@ -148,7 +148,7 @@ export default function KitDetail() {
                 {kit.produits && kit.produits.map(prod => (
                   <li key={prod.id} style={{ display: "flex", gap: "1rem", marginBottom: "1rem", alignItems: "center", borderBottom: "1px solid var(--color-line)", paddingBottom: "1rem" }}>
                     {prod.photo && (
-                      <img src={`http://localhost:4000${prod.photo}`} alt={prod.nom} style={{ width: "60px", height: "60px", objectFit: "cover", borderRadius: "4px" }} />
+                      <img src={`${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:4000'}${prod.photo}`} alt={prod.nom} style={{ width: "60px", height: "60px", objectFit: "cover", borderRadius: "4px" }} />
                     )}
                     <div style={{ flex: 1 }}>
                       <Link to={`/produits/${prod.slug}`} style={{ fontWeight: "500", textDecoration: "none", color: "var(--color-ink)" }}>

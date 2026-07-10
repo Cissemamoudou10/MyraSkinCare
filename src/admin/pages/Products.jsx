@@ -10,7 +10,7 @@ import styles from "./Products.module.css";
 
 const getImgSrc = (photo) => {
   if (!photo) return "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=50&q=75";
-  return photo.startsWith("http") ? photo : `http://localhost:4000${photo}`;
+  return photo.startsWith("http") ? photo : `${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:4000'}${photo}`;
 };
 
 export default function Products() {

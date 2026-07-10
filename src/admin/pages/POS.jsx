@@ -181,7 +181,7 @@ export default function POS() {
               {item.type === "kit" && <span className={styles.badgeKit}>KIT</span>}
               <div className={styles.itemImageWrapper}>
                 {item.photo ? (
-                  <img src={item.photo.startsWith("http") ? item.photo : `http://localhost:4000${item.photo}`} alt={item.displayName} className={styles.itemImage} />
+                  <img src={item.photo.startsWith("http") ? item.photo : `${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:4000'}${item.photo}`} alt={item.displayName} className={styles.itemImage} />
                 ) : (
                   <div className={styles.placeholderImage}><Package size={24} color="#ccc" /></div>
                 )}

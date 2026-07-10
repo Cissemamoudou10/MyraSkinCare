@@ -77,7 +77,7 @@ export default function ProductForm() {
               tags: (existing.tags || []).map(tag => tag.id)
             });
             if (existing.photo) {
-              setPreview(existing.photo.startsWith("http") ? existing.photo : `http://localhost:4000${existing.photo}`);
+              setPreview(existing.photo.startsWith("http") ? existing.photo : `${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:4000'}${existing.photo}`);
             }
           }
         }

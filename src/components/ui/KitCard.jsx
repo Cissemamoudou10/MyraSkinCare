@@ -11,7 +11,7 @@ export function KitCard({ kit }) {
     .map(p => p.photo)
     .filter(Boolean)
     .slice(0, 3)
-    .map(photo => photo.startsWith("http") ? photo : `http://localhost:4000${photo}`);
+    .map(photo => photo.startsWith("http") ? photo : `${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:4000'}${photo}`);
 
   return (
     <div className={styles.card}>
