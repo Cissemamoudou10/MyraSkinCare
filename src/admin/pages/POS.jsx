@@ -119,13 +119,12 @@ export default function POS() {
     if (cart.length === 0) return;
     setSubmitting(true);
     try {
+      // Prix et total sont recalculés par le serveur à partir de la base
       const payload = {
-        total: totalCart,
         items: cart.map(i => ({
           type: i.type,
           id: i.id,
-          quantite: i.quantite,
-          prix_unitaire: i.prix_unitaire
+          quantite: i.quantite
         }))
       };
       await creerVentePOS(payload);
