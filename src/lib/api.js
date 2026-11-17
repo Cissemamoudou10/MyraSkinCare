@@ -103,10 +103,22 @@ export const loginAdmin = async (credentials) => {
   return data; // { token, admin }
 };
 
+// Tout le catalogue (liste admin, caisse, composition des kits) : l'API pagine
+// (100 max par page), on enchaîne donc les pages jusqu'à la dernière.
 export const fetchAdminProduits = async () => {
-  const { data } = await api.get("/admin/produits");
-  return data;
+  const produits = [];
+  let page = 1;
+  let pages = 1;
+  do {
+    const { data } = await api.get("/admin/produits", { params: { page, limit: 100 } });
+    produits.push(...(data.data || []));
+    pages = data.meta?.pages || 1;
+    page += 1;
+  } while (page <= pages);
+  return { data: produits, meta: { total: produits.length } };
 };
+
+export const fetchAdminProduit = async (id) => (await api.get(`/admin/produits/${id}`)).data;
 
 export const fetchAdminStats = async () => {
   const { data } = await api.get("/admin/dashboard/stats");

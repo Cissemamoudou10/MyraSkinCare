@@ -148,6 +148,20 @@ export default function ProductDetail() {
           </div>
 
           <div className={styles.details}>
+            {product.contenance && (
+              <div className={styles.detailItem}>
+                <h4 className={styles.detailLabel}>Contenance</h4>
+                <p className={styles.detailValue}>{product.contenance}</p>
+              </div>
+            )}
+
+            {product.mode_emploi && (
+              <div className={styles.detailItem}>
+                <h4 className={styles.detailLabel}>Mode d'emploi</h4>
+                <p className={styles.detailValue}>{product.mode_emploi}</p>
+              </div>
+            )}
+
             {product.marque && (
               <div className={styles.detailItem}>
                 <h4 className={styles.detailLabel}>Marque</h4>

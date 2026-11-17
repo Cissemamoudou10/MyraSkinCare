@@ -10,16 +10,17 @@ export const NAV = [
     label: "Préoccupations",
     to: "/preoccupations",
     sub: [
-      { label: "Hydratation & confort", to: "/boutique?probleme=hydratation" },
-      { label: "Éclat & teint terne", to: "/boutique?probleme=eclat" },
-      { label: "Imperfections & pores", to: "/boutique?probleme=imperfections" },
+      { label: "Hydratation & confort", to: "/boutique?probleme=hydratation-et-confort" },
+      { label: "Éclat & teint terne", to: "/boutique?probleme=eclat-et-teint-terne" },
+      { label: "Imperfections & pores", to: "/boutique?probleme=imperfections-et-pores" },
+      { label: "Taches pigmentaires", to: "/boutique?probleme=taches-pigmentaires" },
       { label: "Anti-âge", to: "/boutique?probleme=anti-age" },
-      { label: "Sensibilité & rougeurs", to: "/boutique?probleme=rougeurs" },
-      { label: "Soin du regard", to: "/boutique?probleme=regard" },
+      { label: "Sensibilité & rougeurs", to: "/boutique?probleme=sensibilite-et-rougeurs" },
+      { label: "Soin du regard", to: "/boutique?probleme=soin-du-regard" },
     ],
     feature: [
-      { title: "Hydratation & confort", img: "1556228720-195a672e8a03", to: "/boutique?probleme=hydratation" },
-      { title: "Éclat & teint terne", img: "1620916566398-39f1143ab7be", to: "/boutique?probleme=eclat" },
+      { title: "Hydratation & confort", img: "1556228720-195a672e8a03", to: "/boutique?probleme=hydratation-et-confort" },
+      { title: "Éclat & teint terne", img: "1620916566398-39f1143ab7be", to: "/boutique?probleme=eclat-et-teint-terne" },
     ],
   },
   {
@@ -67,7 +68,7 @@ export const NAV = [
       { title: "Huiles capillaires", img: "1612817288484-6f916006741a", to: "/boutique?tag=huile" },
     ],
   },
-  { label: "K-Beauty", to: "/boutique?tag=kbeauty", sub: null },
+  { label: "K-Beauty", to: "/boutique?tag=k-beauty", sub: null },
   { label: "Nos kits", to: "/nos-kits", sub: null },
   { label: "Ingrédients", to: "/ingredients", sub: null },
 ];

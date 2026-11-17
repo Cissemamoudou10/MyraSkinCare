@@ -1,6 +1,6 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
-import { fetchAdminProduits, creerProduit, modifierProduit, fetchAdminCategories, fetchAdminMarques, fetchAdminActifs, fetchAdminProblemes, fetchAdminTypesPeau, fetchAdminTags } from "@/lib/api";
+import { fetchAdminProduit, creerProduit, modifierProduit, fetchAdminCategories, fetchAdminMarques, fetchAdminActifs, fetchAdminProblemes, fetchAdminTypesPeau, fetchAdminTags } from "@/lib/api";
 import { ArrowLeft, Save, Image as ImageIcon, UploadCloud } from "lucide-react";
 import { useDialog } from "@/context/DialogContext";
 import Button from "@/components/ui/Button";
@@ -13,6 +13,8 @@ const EMPTY = {
   prix: "", 
   stock: 0,
   description: "",
+  contenance: "",
+  mode_emploi: "",
   actif: true,
   principes_actifs: [],
   problemes: [],
@@ -60,8 +62,7 @@ export default function ProductForm() {
         setTagsList(tagsRes.data || []);
 
         if (editing) {
-          const prodsRes = await fetchAdminProduits();
-          const existing = (prodsRes.data || []).find((p) => String(p.id) === String(id));
+          const existing = await fetchAdminProduit(id);
           if (existing) {
             setForm({
               nom: existing.nom || "",
@@ -70,6 +71,8 @@ export default function ProductForm() {
               prix: existing.prix || "",
               stock: existing.stock || 0,
               description: existing.description || "",
+              contenance: existing.contenance || "",
+              mode_emploi: existing.mode_emploi || "",
               actif: existing.actif !== false,
               principes_actifs: (existing.principes_actifs || []).map(a => a.id),
               problemes: (existing.problemes || []).map(p => p.id),
@@ -118,6 +121,8 @@ export default function ProductForm() {
     const formData = new FormData();
     formData.append("nom", form.nom);
     formData.append("description", form.description);
+    formData.append("contenance", form.contenance);
+    formData.append("mode_emploi", form.mode_emploi);
     formData.append("prix", form.prix);
     formData.append("stock", form.stock);
     formData.append("actif", form.actif);
@@ -220,6 +225,16 @@ export default function ProductForm() {
           <div className={styles.field}>
             <label className={styles.label}>Description</label>
             <textarea className={styles.textarea} value={form.description} onChange={set("description")} placeholder="Décrivez le produit, son usage..." />
+          </div>
+
+          <div className={styles.field}>
+            <label className={styles.label}>Contenance</label>
+            <input className={styles.input} value={form.contenance} onChange={set("contenance")} placeholder="Ex : 150 ml, 60 pads" maxLength={50} />
+          </div>
+
+          <div className={styles.field}>
+            <label className={styles.label}>Mode d'emploi</label>
+            <textarea className={styles.textarea} value={form.mode_emploi} onChange={set("mode_emploi")} placeholder="Quand et comment l'appliquer..." />
           </div>
 
           <div className={styles.field}>
