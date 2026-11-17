@@ -253,6 +253,17 @@ export const livrerCommande = async (id) => modifierStatutCommande(id, "livraiso
 export const marquerLivreeCommande = async (id) => modifierStatutCommande(id, "livree");
 export const annulerCommande = async (id) => modifierStatutCommande(id, "annuler");
 
+// --- Paramètres ---
+export const fetchParametres = async () => {
+  const { data } = await api.get("/admin/parametres");
+  return data;
+};
+
+export const modifierParametres = async (payload) => {
+  const { data } = await api.put("/admin/parametres", payload);
+  return data;
+};
+
 // --- Articles (Journal) ---
 export const fetchPublicArticles = async (params = {}) => {
   const { data } = await api.get("/articles", { params });
@@ -283,5 +294,11 @@ export const supprimerArticle = async (id) => {
   const { data } = await api.delete(`/admin/articles/${id}`);
   return data;
 };
+
+// --- WhatsApp (connexion du numéro de la boutique) ---
+export const fetchEtatWhatsapp = async () => (await api.get("/admin/whatsapp/etat")).data;
+export const connecterWhatsapp = async (numero) => (await api.post("/admin/whatsapp/connexion", { numero })).data;
+export const deconnecterWhatsapp = async () => (await api.post("/admin/whatsapp/deconnexion")).data;
+export const envoyerTestWhatsapp = async (numero) => (await api.post("/admin/whatsapp/test", { numero })).data;
 
 export default api;

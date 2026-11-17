@@ -26,6 +26,8 @@ import ArticlesAdmin from "@/admin/pages/ArticlesAdmin";
 import KitsAdmin from "@/admin/pages/KitsAdmin";
 import KitForm from "@/admin/pages/KitForm";
 import POS from "@/admin/pages/POS";
+import WhatsApp from "@/admin/pages/WhatsApp";
+import Settings from "@/admin/pages/Settings";
 import Login from "@/admin/pages/Login";
 import { AuthProvider } from "@/context/AuthContext";
 import { ProductModalProvider } from "@/context/ProductModalContext";
@@ -74,7 +76,8 @@ export default function App() {
                   <Route path="kits" element={<KitsAdmin />} />
                   <Route path="kits/:id" element={<KitForm />} />
                   <Route path="avis" element={<ReviewsAdmin />} />
-                  <Route path="parametres" element={<Placeholder title="Paramètres (admin)" subtitle="Réglages de la boutique à venir." />} />
+                  <Route path="whatsapp" element={<WhatsApp />} />
+                  <Route path="parametres" element={<Settings />} />
                 </Route>
               </Routes>
             </BrowserRouter>

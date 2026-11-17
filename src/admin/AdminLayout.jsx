@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink, Outlet, useNavigate, Navigate } from "react-router-dom";
-import { LayoutDashboard, Package, ShoppingBag, Tags, Settings, LogOut, ArrowLeft, MessageSquare, BookOpen, Menu, X, Store } from "lucide-react";
+import { LayoutDashboard, Package, ShoppingBag, Tags, Settings, LogOut, ArrowLeft, MessageSquare, MessageCircle, BookOpen, Menu, X, Store } from "lucide-react";
 import styles from "./AdminLayout.module.css";
 import { useAuth } from "@/context/AuthContext";
 
@@ -13,6 +13,7 @@ const LINKS = [
   { to: "/admin/caracteristiques", label: "Caractéristiques", icon: Tags },
   { to: "/admin/journal", label: "Journal", icon: BookOpen },
   { to: "/admin/avis", label: "Avis Clients", icon: MessageSquare },
+  { to: "/admin/whatsapp", label: "WhatsApp", icon: MessageCircle },
   { to: "/admin/parametres", label: "Paramètres", icon: Settings },
 ];
 
