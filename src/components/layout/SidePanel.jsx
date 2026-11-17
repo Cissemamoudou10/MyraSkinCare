@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { NAV } from "@/data/navigation";
+import { useNav } from "@/context/NavContext";
 import { CloseIcon } from "@/components/ui/icons";
 import styles from "./SidePanel.module.css";
 
 export default function SidePanel({ open, onClose }) {
   const [openIdx, setOpenIdx] = useState(-1);
+  const { nav } = useNav();
 
   return (
     <>
@@ -19,7 +20,7 @@ export default function SidePanel({ open, onClose }) {
         </button>
 
         <nav className={styles.nav}>
-          {NAV.map((item, i) => {
+          {nav.map((item, i) => {
             const isOpen = openIdx === i;
             const hasSub = !!item.sub;
             return (

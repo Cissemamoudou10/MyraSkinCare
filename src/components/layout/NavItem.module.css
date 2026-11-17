@@ -69,6 +69,16 @@
   padding: 9px 24px;
 }
 
+.panel .links.colonnes {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(8, auto);
+  column-gap: 32px;
+  /* La grille définit sa propre largeur (sinon centrée et rognée par .mega .links) */
+  justify-content: start;
+  width: max-content;
+}
+
 /* Méga-menu (avec images) */
 .mega {
   display: grid;
@@ -116,7 +126,8 @@
 .featureImg img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 8px;
 }
 .featureTitle {
   font-family: var(--font-sans);

@@ -1,3 +1,4 @@
+import { urlImage } from "@/lib/images";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
@@ -8,10 +9,7 @@ import Button from "@/components/ui/Button";
 import { useDialog } from "@/context/DialogContext";
 import styles from "./CartDrawer.module.css";
 
-const getImgSrc = (photo) => {
-  if (!photo) return "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=50&q=75";
-  return photo.startsWith("http") ? photo : `${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:4000'}${photo}`;
-};
+const getImgSrc = (photo) => urlImage(photo);
 
 export default function CartDrawer() {
   const navigate = useNavigate();

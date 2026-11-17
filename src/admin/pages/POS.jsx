@@ -1,3 +1,4 @@
+import { urlImage } from "@/lib/images";
 import { useState, useEffect, useMemo } from "react";
 import { fetchAdminProduits, fetchAdminKits, creerVentePOS } from "@/lib/api";
 import { ShoppingBag, Search, Plus, Minus, Trash2, CheckCircle, Package } from "lucide-react";
@@ -180,7 +181,7 @@ export default function POS() {
               {item.type === "kit" && <span className={styles.badgeKit}>KIT</span>}
               <div className={styles.itemImageWrapper}>
                 {item.photo ? (
-                  <img src={item.photo.startsWith("http") ? item.photo : `${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:4000'}${item.photo}`} alt={item.displayName} className={styles.itemImage} />
+                  <img src={urlImage(item.photo)} alt={item.displayName} className={styles.itemImage} />
                 ) : (
                   <div className={styles.placeholderImage}><Package size={24} color="#ccc" /></div>
                 )}

@@ -3,21 +3,20 @@ import Reveal from "@/components/ui/Reveal";
 import SectionHead from "@/components/ui/SectionHead";
 import Button from "@/components/ui/Button";
 import { ProductCard, MiniCard } from "@/components/ui/ProductCard";
-import { fetchProduits, fetchProblemes, fetchMarques, fetchAvis } from "@/lib/api";
+import { KitCard } from "@/components/ui/KitCard";
+import { fetchProduits, fetchProblemes, fetchMarques, fetchAvis, fetchPublicArticles, fetchKits } from "@/lib/api";
+import { urlImage } from "@/lib/images";
 import { Link } from "react-router-dom";
-import {
-  ARTICLES,
-} from "@/data/products";
 import styles from "./HomeSections.module.css";
 
-const img = (id, w = 600) => `https://images.unsplash.com/photo-${id}?w=${w}&q=75`;
+const TYPE_LABELS = { conseil: "Conseils", ingredient: "Ingrédients", rituel: "Rituels" };
 
 /* Réassurance */
 export function Reassurance() {
   const items = [
     { t: "Livraison à Bamako", d: "Sous 24 à 48 h, et partout au Mali." },
     { t: "Conseil personnalisé", d: "Échangez avec nous sur WhatsApp." },
-    { t: "Paiement à la livraison", d: "Réglez en toute confiance, à réception." },
+    { t: "Paiement mobile", d: "Orange Money ou Sarali, avant l'expédition." },
   ];
   return (
     <section className={styles.reassurance}>
@@ -53,9 +52,9 @@ export function Concerns() {
       <div className={`container-narrow ${styles.concernsGrid}`}>
         {concerns.map((c, i) => (
           <Reveal key={c.nom} delay={(i % 4) * 0.08}>
-            <Link to={`/preoccupations?id=${c.id}`} className={styles.concern}>
+            <Link to={`/boutique?probleme=${c.slug}`} className={styles.concern}>
               <div className={styles.concernImg}>
-                <img src={img("1556228720-195a672e8a03", 500)} alt="" />
+                {c.image_url && <img src={urlImage(c.image_url)} alt="" />}
               </div>
               <div className={styles.concernLabel}>
                 <span>{c.nom}</span>
@@ -72,7 +71,7 @@ export function Concerns() {
 export function Collection({ onOpen }) {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetchProduits({ limit: 6 }).then(res => setProducts(res.data || []));
+    fetchProduits({ limit: 8, tag: "k-beauty", sort: "nom", order: "asc" }).then(res => setProducts(res.data || []));
   }, []);
 
   return (
@@ -95,7 +94,7 @@ export function Collection({ onOpen }) {
 export function NewArrivals() {
   const [products, setProducts] = useState([]);
   useEffect(() => {
-    fetchProduits({ limit: 4, sort: 'date', order: 'desc' }).then(res => setProducts(res.data || []));
+    fetchProduits({ limit: 4, sort: 'date', order: 'desc', nouveautes: 'true' }).then(res => setProducts(res.data || []));
   }, []);
 
   return (
@@ -117,29 +116,32 @@ export function NewArrivals() {
   );
 }
 
-/* Best-sellers */
-export function BestSellers() {
-  const [products, setProducts] = useState([]);
+/* Nos kits (routines composées) */
+export function Kits() {
+  const [kits, setKits] = useState([]);
   useEffect(() => {
-    // Note: sans endpoint 'bestsellers' spécifique, on trie par nom ou on limite
-    fetchProduits({ limit: 4, sort: 'nom', order: 'asc' }).then(res => setProducts(res.data || []));
+    fetchKits({ limit: 3 }).then((res) => setKits(res.data || [])).catch(() => setKits([]));
   }, []);
 
+  if (kits.length === 0) return null;
   return (
     <section className={styles.padCream}>
       <Reveal>
         <SectionHead
-          eyebrow="Les préférés"
-          title="Best-sellers"
-          sub="Les soins plébiscités par notre clientèle."
+          eyebrow="Nos routines"
+          title="Les kits Myra"
+          sub="Des routines complètes, composées pour vous, à adopter en une fois."
         />
       </Reveal>
-      <div className={`container-narrow ${styles.miniGrid}`}>
-        {products.map((p, i) => (
-          <Reveal key={p.id} delay={(i % 4) * 0.08}>
-            <MiniCard p={p} badge="Best-seller" />
+      <div className={`container ${styles.productGrid}`}>
+        {kits.map((kit, i) => (
+          <Reveal key={kit.id} delay={(i % 3) * 0.1}>
+            <KitCard kit={kit} />
           </Reveal>
         ))}
+      </div>
+      <div className={styles.center}>
+        <Button variant="dark" to="/nos-kits">Voir tous les kits</Button>
       </div>
     </section>
   );
@@ -147,6 +149,13 @@ export function BestSellers() {
 
 /* Éditorial / philosophie */
 export function Editorial() {
+  const [photos, setPhotos] = useState([]);
+  useEffect(() => {
+    fetchProduits({ limit: 4, tag: "serum" })
+      .then((res) => setPhotos((res.data || []).map((p) => p.photo).filter(Boolean)))
+      .catch(() => setPhotos([]));
+  }, []);
+
   return (
     <section className={styles.editorial}>
       <div className={styles.editorialText}>
@@ -167,10 +176,13 @@ export function Editorial() {
           </p>
         </Reveal>
       </div>
-      <div
-        className={styles.editorialImg}
-        style={{ backgroundImage: `url(${img("1556228578-8c89e6adf883", 1100)})` }}
-      />
+      <div className={styles.editorialMosaic}>
+        {photos.map((photo) => (
+          <div key={photo} className={styles.editorialTile}>
+            <img src={urlImage(photo)} alt="" />
+          </div>
+        ))}
+      </div>
     </section>
   );
 }
@@ -188,14 +200,14 @@ export function PartnerBrands() {
         <SectionHead
           eyebrow="Notre sélection"
           title="Les marques partenaires"
-          sub="Aux côtés de nos propres soins, une sélection exigeante de marques que nous aimons."
+          sub="Une sélection exigeante de marques coréennes, et quelques incontournables du soin du corps."
         />
       </Reveal>
       <div className={`${styles.brandsGrid}`}>
         {brands.map((b) => (
-          <div key={b.id} className={styles.brand}>
+          <Link key={b.id} to={`/boutique?marque=${b.slug}`} className={styles.brand}>
             <span>{b.nom}</span>
-          </div>
+          </Link>
         ))}
       </div>
     </section>
@@ -209,15 +221,14 @@ export function Reviews() {
     fetchAvis().then(res => setReviews(res.data || []));
   }, []);
 
+  if (reviews.length === 0) return null;
   return (
     <section className={styles.reviews}>
       <Reveal>
         <SectionHead eyebrow="Témoignages" title="Ce qu'elles en disent" light />
       </Reveal>
       <div className={`container-narrow ${styles.reviewsGrid}`}>
-        {reviews.length === 0 ? (
-          <p style={{ color: "#fff", textAlign: "center", gridColumn: "1 / -1" }}>Aucun avis pour le moment.</p>
-        ) : reviews.map((r, i) => (
+        {reviews.map((r, i) => (
           <Reveal key={r.id} delay={(i % 3) * 0.1}>
             <div className={styles.review}>
               <p className={styles.stars}>{"★".repeat(r.note)}{"☆".repeat(5 - r.note)}</p>
@@ -263,6 +274,12 @@ export function About() {
 
 /* Journal */
 export function Journal() {
+  const [articles, setArticles] = useState([]);
+  useEffect(() => {
+    fetchPublicArticles({ limit: 3 }).then(res => setArticles(res.data || []));
+  }, []);
+
+  if (articles.length === 0) return null;
   return (
     <section className={styles.padCream}>
       <Reveal>
@@ -273,14 +290,14 @@ export function Journal() {
         />
       </Reveal>
       <div className={`container-narrow ${styles.journalGrid}`}>
-        {ARTICLES.map((a, i) => (
-          <Reveal key={a.title} delay={(i % 3) * 0.1}>
+        {articles.map((a, i) => (
+          <Reveal key={a.id} delay={(i % 3) * 0.1}>
             <Link to="/journal" className={styles.article}>
               <div className={styles.articleImg}>
-                <img src={img(a.img)} alt="" />
+                {a.image_url && <img src={urlImage(a.image_url)} alt="" />}
               </div>
-              <p className={styles.articleCat}>{a.cat}</p>
-              <h3 className={styles.articleTitle}>{a.title}</h3>
+              <p className={styles.articleCat}>{TYPE_LABELS[a.type] || a.type}</p>
+              <h3 className={styles.articleTitle}>{a.titre}</h3>
               <span className={styles.articleLink}>Lire l'article</span>
             </Link>
           </Reveal>

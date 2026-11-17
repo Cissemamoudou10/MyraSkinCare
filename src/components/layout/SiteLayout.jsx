@@ -5,13 +5,14 @@ import SidePanel from "@/components/layout/SidePanel";
 import Footer from "@/components/layout/Footer";
 import CartDrawer from "@/components/cart/CartDrawer";
 import { useCart } from "@/context/CartContext";
+import { NavProvider } from "@/context/NavContext";
 
 export default function SiteLayout() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { cartCount, setIsCartOpen } = useCart();
 
   return (
-    <>
+    <NavProvider>
       <Header
         onMenu={() => setMenuOpen(true)}
         onSearch={() => {}}
@@ -24,6 +25,6 @@ export default function SiteLayout() {
         <Outlet />
       </main>
       <Footer />
-    </>
+    </NavProvider>
   );
 }

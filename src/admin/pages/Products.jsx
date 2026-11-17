@@ -1,3 +1,4 @@
+import { urlImage } from "@/lib/images";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { fetchAdminProduits } from "@/lib/api";
@@ -8,10 +9,7 @@ import { useDialog } from "@/context/DialogContext";
 import { SkeletonRow } from "@/components/ui/Skeleton";
 import styles from "./Products.module.css";
 
-const getImgSrc = (photo) => {
-  if (!photo) return "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=50&q=75";
-  return photo.startsWith("http") ? photo : `${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:4000'}${photo}`;
-};
+const getImgSrc = (photo) => urlImage(photo);
 
 export default function Products() {
   const [products, setProducts] = useState([]);

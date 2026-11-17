@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { NAV } from "@/data/navigation";
+import { useNav } from "@/context/NavContext";
 import NavItem from "./NavItem";
 import { SearchIcon, CartIcon, MenuIcon } from "@/components/ui/icons";
 import logo from "@/assets/logo-myra.png";
@@ -10,6 +10,7 @@ export default function Header({ onMenu, onSearch, onCart, cartCount = 0 }) {
   const [solid, setSolid] = useState(false);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
+  const { nav } = useNav();
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 80);
@@ -60,8 +61,8 @@ export default function Header({ onMenu, onSearch, onCart, cartCount = 0 }) {
 
         {/* Centre : navigation */}
         <nav className={styles.nav}>
-          {NAV.map((item, i) => (
-            <NavItem key={item.label} item={item} alignRight={i >= 6} />
+          {nav.map((item, i) => (
+            <NavItem key={item.label} item={item} alignRight={i >= nav.length - 3} />
           ))}
         </nav>
 

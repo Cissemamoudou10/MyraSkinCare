@@ -62,17 +62,17 @@ export const creerCommande = async (commandeData) => {
   return data;
 };
 
-export const fetchCategories = async () => {
-  const { data } = await api.get("/categories");
+export const fetchCategories = async (params = {}) => {
+  const { data } = await api.get("/categories", { params });
   return data;
 };
 
-export const fetchMarques = async () => {
-  const { data } = await api.get("/marques");
+export const fetchMarques = async (params = {}) => {
+  const { data } = await api.get("/marques", { params });
   return data;
 };
 
-export const fetchProblemes = async () => api.get("/problemes").then((r) => r.data);
+export const fetchProblemes = async (params = {}) => api.get("/problemes", { params }).then((r) => r.data);
 export const fetchTypesPeau = async () => api.get("/types-peau").then((r) => r.data);
 export const fetchTags = async () => api.get("/tags").then((r) => r.data);
 

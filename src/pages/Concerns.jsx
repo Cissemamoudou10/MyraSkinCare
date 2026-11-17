@@ -36,7 +36,7 @@ export default function Concerns() {
                 <Link to={`/boutique?probleme=${p.slug}`} className={styles.card}>
                   <div className={styles.imageContainer}>
                     {p.image_url ? (
-                      <img src={`${import.meta.env.VITE_API_URL.replace("/api", "")}${p.image_url}`} alt={p.nom} className={styles.image} />
+                      <img src={p.image_url} alt={p.nom} className={styles.image} />
                     ) : (
                       <div className={styles.placeholderImage}>
                         <span>{p.nom}</span>

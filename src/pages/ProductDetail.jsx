@@ -1,3 +1,4 @@
+import { urlImage } from "@/lib/images";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useCart } from "@/context/CartContext";
@@ -6,10 +7,7 @@ import { formatPrice } from "@/data/products";
 import Skeleton from "@/components/ui/Skeleton";
 import styles from "./ProductDetail.module.css";
 
-const getImgSrc = (photo) => {
-  if (!photo) return "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=800&q=80";
-  return photo.startsWith("http") ? photo : `${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:4000'}${photo}`;
-};
+const getImgSrc = (photo) => urlImage(photo);
 
 export default function ProductDetail() {
   const { slug } = useParams();

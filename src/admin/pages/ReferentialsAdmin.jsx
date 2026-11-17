@@ -49,6 +49,11 @@ export default function ReferentialsAdmin() {
       if (activeTab.id !== "principes-actifs") {
         payload.image_url = form.image_url;
       }
+      if (activeTab.id === "categories") {
+        payload.parent_id = form.parent_id || null;
+        payload.ordre = parseInt(form.ordre, 10) || 0;
+        payload.affiche_menu = !!form.affiche_menu;
+      }
       if (form.id) {
         await modifierReferentiel(activeTab.id, form.id, payload);
       } else {
@@ -83,7 +88,7 @@ export default function ReferentialsAdmin() {
           <h1 className={styles.title}>Caractéristiques</h1>
           <p className={styles.subtitle}>Gérez les attributs associés à vos produits.</p>
         </div>
-        <button className={s.btn} onClick={() => setForm({ nom: "", description: "", image_url: "" })} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <button className={s.btn} onClick={() => setForm({ nom: "", description: "", image_url: "", parent_id: "", ordre: 0, affiche_menu: true })} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <Plus size={16} /> Ajouter
         </button>
       </header>
@@ -165,7 +170,51 @@ export default function ReferentialsAdmin() {
                 )}
               </div>
             )}
-            
+
+            {activeTab.id === "categories" && (
+              <>
+                <div style={{ flex: 1.2 }}>
+                  <label style={{ display: "block", marginBottom: "8px", fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-ink)" }}>
+                    Rubrique parente
+                  </label>
+                  <select
+                    value={form.parent_id || ""}
+                    onChange={(e) => setForm({ ...form, parent_id: e.target.value })}
+                    style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--color-line)", borderRadius: "4px", fontFamily: "var(--font-body)", fontSize: "14px" }}
+                  >
+                    <option value="">Aucune (rubrique principale)</option>
+                    {data
+                      .filter((c) => !c.parent_id && c.id !== form.id)
+                      .map((c) => (
+                        <option key={c.id} value={c.id}>{c.nom}</option>
+                      ))}
+                  </select>
+                </div>
+                <div style={{ width: "90px" }}>
+                  <label style={{ display: "block", marginBottom: "8px", fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-ink)" }}>
+                    Ordre
+                  </label>
+                  <input
+                    type="number"
+                    value={form.ordre ?? 0}
+                    onChange={(e) => setForm({ ...form, ordre: e.target.value })}
+                    style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--color-line)", borderRadius: "4px", fontFamily: "var(--font-body)", fontSize: "14px" }}
+                  />
+                </div>
+                <div style={{ display: "flex", alignItems: "center", gap: "8px", paddingBottom: "12px" }}>
+                  <input
+                    id="affiche_menu"
+                    type="checkbox"
+                    checked={form.affiche_menu !== false}
+                    onChange={(e) => setForm({ ...form, affiche_menu: e.target.checked })}
+                  />
+                  <label htmlFor="affiche_menu" style={{ fontFamily: "var(--font-sans)", fontSize: "11px", color: "var(--color-ink)" }}>
+                    Afficher dans le menu
+                  </label>
+                </div>
+              </>
+            )}
+
             <div style={{ display: "flex", gap: "12px" }}>
               <button type="button" onClick={() => setForm(null)} style={{ padding: "12px 24px", background: "transparent", border: "1px solid var(--color-line)", borderRadius: "4px", cursor: "pointer", fontFamily: "var(--font-sans)", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                 Annuler
@@ -189,6 +238,9 @@ export default function ReferentialsAdmin() {
                   {activeTab.id !== "principes-actifs" && <th style={{ width: "60px" }}>Illu.</th>}
                   <th>Nom</th>
                   {activeTab.id === "marques" && <th>Description</th>}
+                  {activeTab.id === "categories" && <th>Rubrique parente</th>}
+                  {activeTab.id === "categories" && <th style={{ width: "70px" }}>Ordre</th>}
+                  {activeTab.id === "categories" && <th style={{ width: "90px" }}>Menu</th>}
                   <th className={styles.rightAlign}>Actions</th>
                 </tr>
               </thead>
@@ -216,6 +268,13 @@ export default function ReferentialsAdmin() {
                     )}
                     <td className={styles.fw500}>{item.nom}</td>
                     {activeTab.id === "marques" && <td>{item.description || "-"}</td>}
+                    {activeTab.id === "categories" && (
+                      <td>{data.find((c) => c.id === item.parent_id)?.nom || "—"}</td>
+                    )}
+                    {activeTab.id === "categories" && <td>{item.ordre ?? 0}</td>}
+                    {activeTab.id === "categories" && (
+                      <td>{item.affiche_menu === false ? "Masqué" : "Visible"}</td>
+                    )}
                     <td className={styles.rightAlign}>
                       <div className={styles.actions}>
                         <button onClick={() => setForm(item)} className={styles.btnIcon} title="Modifier">

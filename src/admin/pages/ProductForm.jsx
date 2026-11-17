@@ -1,3 +1,4 @@
+import { urlImage } from "@/lib/images";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { fetchAdminProduit, creerProduit, modifierProduit, fetchAdminCategories, fetchAdminMarques, fetchAdminActifs, fetchAdminProblemes, fetchAdminTypesPeau, fetchAdminTags } from "@/lib/api";
@@ -80,7 +81,7 @@ export default function ProductForm() {
               tags: (existing.tags || []).map(tag => tag.id)
             });
             if (existing.photo) {
-              setPreview(existing.photo.startsWith("http") ? existing.photo : `${import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace('/api', '') : 'http://localhost:4000'}${existing.photo}`);
+              setPreview(urlImage(existing.photo));
             }
           }
         }

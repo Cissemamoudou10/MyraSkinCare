@@ -6,7 +6,7 @@ import {
   Collection,
   NewArrivals,
   Editorial,
-  BestSellers,
+  Kits,
   PartnerBrands,
   Reviews,
   About,
@@ -23,7 +23,7 @@ export default function Home() {
       <Collection />
       <NewArrivals />
       <Editorial />
-      <BestSellers />
+      <Kits />
       <PartnerBrands />
       <Reviews />
       <About />
