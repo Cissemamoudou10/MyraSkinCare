@@ -1,0 +1,30 @@
+.panneau {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  background: var(--color-cream);
+  padding: 28px 22px;
+  overflow-y: auto;
+}
+.entete {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+.titre {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+.fermer {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-grey);
+}

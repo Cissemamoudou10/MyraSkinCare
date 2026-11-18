@@ -163,7 +163,7 @@ export default function Dashboard() {
 
       {/* Filtres de période pour les statistiques détaillées */}
       <div style={{ marginTop: '2rem', padding: '1.5rem', background: 'rgba(250, 248, 244, 0.4)', border: '1px solid var(--color-line)', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }} data-html2canvas-ignore="true">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-ink)', fontWeight: 'bold' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-ink)', fontWeight: 500 }}>
           <Calendar size={18} /> Statistiques par période :
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -263,7 +263,7 @@ export default function Dashboard() {
             {topProducts.length === 0 ? <p className={styles.empty}>Aucune donnée sur cette période.</p> : topProducts.map((p, i) => (
               <Link to={`/admin/produits/${p.id}`} key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', textDecoration: 'none' }}>
                 <span style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-ink)' }}>{i+1}. {p.nom}</span>
-                <span style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', fontWeight: 'bold', color: 'var(--color-ink)' }}>{p.quantite_vendue} vendus</span>
+                <span style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', fontWeight: 500, color: 'var(--color-ink)' }}>{p.quantite_vendue} vendus</span>
               </Link>
             ))}
           </div>
@@ -278,7 +278,7 @@ export default function Dashboard() {
             {topKits.length === 0 ? <p className={styles.empty}>Aucune donnée sur cette période.</p> : topKits.map((k, i) => (
               <Link to={`/admin/kits/${k.id}`} key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', textDecoration: 'none' }}>
                 <span style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-ink)' }}>{i+1}. {k.nom}</span>
-                <span style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', fontWeight: 'bold', color: 'var(--color-ink)' }}>{k.quantite_vendue} vendus</span>
+                <span style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', fontWeight: 500, color: 'var(--color-ink)' }}>{k.quantite_vendue} vendus</span>
               </Link>
             ))}
           </div>
@@ -293,7 +293,7 @@ export default function Dashboard() {
               <Link to={`/admin/produits/${p.id}`} key={p.id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', textDecoration: 'none' }}>
                 <span style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--color-ink)' }}>{p.nom}</span>
                 <span style={{ 
-                  fontFamily: 'var(--font-sans)', fontSize: '12px', fontWeight: 'bold',
+                  fontFamily: 'var(--font-sans)', fontSize: '12px', fontWeight: 500,
                   color: p.stock === 0 ? 'var(--color-red)' : 'var(--color-gold)',
                   background: p.stock === 0 ? 'rgba(239, 68, 68, 0.1)' : 'rgba(234, 179, 8, 0.1)',
                   padding: '4px 8px', borderRadius: '4px'

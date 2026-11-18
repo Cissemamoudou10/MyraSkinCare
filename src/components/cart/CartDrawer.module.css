@@ -40,7 +40,7 @@
   border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 .header h2 {
-  font-family: "Georgia", serif;
+  font-family: var(--font-serif);
   font-size: 1.5rem;
   font-weight: 400;
   margin: 0;
@@ -150,7 +150,7 @@
 }
 
 .itemName {
-  font-family: "Georgia", serif;
+  font-family: var(--font-serif);
   font-size: 1.1rem;
   font-weight: 400;
   margin: 0 0 0.5rem 0;
@@ -229,7 +229,7 @@
 }
 
 .totalPrice {
-  font-family: "Georgia", serif;
+  font-family: var(--font-serif);
   font-size: 1.5rem;
   text-transform: none;
 }
@@ -241,7 +241,7 @@
 }
 
 .checkoutForm h3 {
-  font-family: "Georgia", serif;
+  font-family: var(--font-serif);
   font-size: 1.5rem;
   font-weight: 400;
   margin: 0 0 1rem 0;

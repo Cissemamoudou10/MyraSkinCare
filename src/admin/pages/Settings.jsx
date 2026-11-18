@@ -1,3 +1,4 @@
+import Select from "@/components/ui/Select";
 import { useState, useEffect } from "react";
 import { fetchParametres, modifierParametres } from "@/lib/api";
 import { useDialog } from "@/context/DialogContext";
@@ -83,12 +84,12 @@ export default function Settings() {
               </p>
               <div className={s.field}>
                 <label className={s.label} htmlFor="nouveaute">Seuil</label>
-                <select id="nouveaute" className={s.select} value={form.nouveaute_duree_jours}
-                  onChange={(e) => setForm({ ...form, nouveaute_duree_jours: parseInt(e.target.value, 10) })}>
-                  {OPTIONS_NOUVEAUTE.map((o) => (
-                    <option key={o.jours} value={o.jours}>{o.label}</option>
-                  ))}
-                </select>
+                <Select
+                  id="nouveaute"
+                  value={form.nouveaute_duree_jours}
+                  onChange={(v) => setForm({ ...form, nouveaute_duree_jours: v })}
+                  options={OPTIONS_NOUVEAUTE.map((o) => ({ value: o.jours, label: o.label }))}
+                />
               </div>
             </section>
 

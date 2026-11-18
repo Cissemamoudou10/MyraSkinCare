@@ -70,8 +70,19 @@ img {
   display: block;
 }
 
-button {
+/* Les champs n héritent pas de la police par défaut : sans cela, police système (Arial) */
+button,
+input,
+select,
+textarea {
   font-family: inherit;
+  color: inherit;
+}
+
+/* Polices chargées en 400/500 uniquement : jamais de gras synthétique */
+b,
+strong {
+  font-weight: 500;
 }
 
 ::selection {

@@ -160,7 +160,7 @@ export default function KitsAdmin() {
             <div style={{ marginBottom: "16px", padding: "16px", background: "#f5f5f5", borderRadius: "4px" }}>
               <div style={{ marginBottom: "8px" }}><strong>Valeur réelle :</strong> {formatPrice(selectedKit.prix.prix_plein)}</div>
               {selectedKit.prix.en_promo && (
-                <div style={{ color: "#d32f2f", fontWeight: "bold" }}>
+                <div style={{ color: "#d32f2f", fontWeight: 500 }}>
                   <strong>Prix promo (-{selectedKit.prix.reduction_pourcentage}%) :</strong> {formatPrice(selectedKit.prix.prix_final)}
                 </div>
               )}

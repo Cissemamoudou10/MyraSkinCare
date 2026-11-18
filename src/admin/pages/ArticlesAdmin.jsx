@@ -1,3 +1,4 @@
+import Select from "@/components/ui/Select";
 import { useState, useEffect } from "react";
 import { fetchAdminArticles, creerArticle, modifierArticle, supprimerArticle } from "@/lib/api";
 import { Plus, Edit2, Trash2, CheckCircle, XCircle } from "lucide-react";
@@ -107,15 +108,15 @@ export default function ArticlesAdmin() {
                 <label style={{ display: "block", marginBottom: "8px", fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-ink)" }}>
                   Type
                 </label>
-                <select 
-                  value={form.type} 
-                  onChange={(e) => setForm({...form, type: e.target.value})} 
-                  style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--color-line)", borderRadius: "4px", fontFamily: "var(--font-body)", fontSize: "14px", appearance: "none", background: "var(--color-white)" }}
-                >
-                  <option value="conseil">Conseil</option>
-                  <option value="ingredient">Ingrédient focus</option>
-                  <option value="rituel">Rituel</option>
-                </select>
+                <Select
+                  value={form.type}
+                  onChange={(v) => setForm({ ...form, type: v })}
+                  options={[
+                    { value: "conseil", label: "Conseil" },
+                    { value: "ingredient", label: "Ingrédient focus" },
+                    { value: "rituel", label: "Rituel" },
+                  ]}
+                />
               </div>
             </div>
 

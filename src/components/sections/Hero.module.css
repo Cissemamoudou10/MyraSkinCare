@@ -32,8 +32,10 @@
   position: relative;
   text-align: center;
   color: var(--color-ink);
-  padding: 24px;
+  padding: 48px 56px;
   z-index: 2;
+  /* Voile crème : le titre reste lisible même si une vignette passe derrière */
+  background: radial-gradient(closest-side, rgba(250, 248, 244, 0.95) 60%, rgba(250, 248, 244, 0));
 }
 .eyebrow {
   font-family: var(--font-sans);

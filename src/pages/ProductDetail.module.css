@@ -98,7 +98,7 @@
 }
 
 .title {
-  font-family: "Georgia", serif;
+  font-family: var(--font-serif);
   font-size: 2.5rem;
   font-weight: 400;
   color: var(--color-ink);
@@ -206,7 +206,7 @@
   letter-spacing: 0.15em;
   color: var(--color-grey);
   margin-bottom: 0.5rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .detailValue {

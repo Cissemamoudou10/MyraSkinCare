@@ -80,27 +80,9 @@
   height: 34px;
 }
 
+/* La barre et ses suggestions : components/recherche/RechercheRapide */
 .searchDesktop {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  border-bottom: 1px solid var(--color-line);
-  padding-bottom: 5px;
-  width: 190px;
-  transition: border-color 0.3s ease;
-}
-.searchDesktop:focus-within {
-  border-color: var(--color-gold);
-}
-.searchDesktop input {
-  flex: 1;
-  border: none;
-  outline: none;
-  background: transparent;
-  font-family: var(--font-body);
-  font-size: 15px;
-  color: var(--color-ink);
-  min-width: 0;
+  display: block;
 }
 
 .searchMobile {

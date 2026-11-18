@@ -106,7 +106,7 @@ export default function KitDetail() {
               <div className={styles.placeholder} />
             )}
             {en_promo && reduction_pourcentage > 0 && (
-              <div style={{ position: 'absolute', top: '16px', right: '16px', background: '#d32f2f', color: 'white', padding: '8px 16px', borderRadius: '4px', fontWeight: 'bold', textTransform: 'uppercase', fontSize: '12px' }}>
+              <div style={{ position: 'absolute', top: '16px', right: '16px', background: '#d32f2f', color: 'white', padding: '8px 16px', borderRadius: '4px', fontWeight: 500, textTransform: 'uppercase', fontSize: '12px' }}>
                 Promo -{reduction_pourcentage}%
               </div>
             )}
@@ -121,12 +121,12 @@ export default function KitDetail() {
                   <span style={{ textDecoration: "line-through", color: "var(--color-grey)", marginRight: "12px", fontSize: "1.2rem" }}>
                     {prix_plein} FCFA
                   </span>
-                  <span style={{ color: "#d32f2f", fontSize: "1.5rem", fontWeight: "bold" }}>
+                  <span style={{ color: "#d32f2f", fontSize: "1.5rem", fontWeight: 500 }}>
                     {prix_final} FCFA
                   </span>
                 </>
               ) : (
-                <span className={styles.price} style={{ fontSize: "1.5rem", fontWeight: "bold" }}>{prix_plein} FCFA</span>
+                <span className={styles.price} style={{ fontSize: "1.5rem", fontWeight: 500 }}>{prix_plein} FCFA</span>
               )}
             </div>
 

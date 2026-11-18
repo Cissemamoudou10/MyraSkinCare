@@ -271,7 +271,7 @@ export default function KitForm() {
             <h2 className={styles.sectionTitle}>Promotion</h2>
             <p style={{ fontSize: "12px", color: "var(--color-grey)", marginBottom: "16px" }}>Appliquez une réduction au prix total des produits inclus.</p>
 
-            <label className={styles.checkboxItem} style={{ marginBottom: "16px", fontWeight: "bold" }}>
+            <label className={styles.checkboxItem} style={{ marginBottom: "16px", fontWeight: 500 }}>
               <input type="checkbox" checked={form.promo_active} onChange={e => setForm({...form, promo_active: e.target.checked})} />
               Activer la promotion sur ce kit
             </label>
@@ -310,7 +310,7 @@ export default function KitForm() {
               {form.promo_active && form.reduction_pourcentage > 0 && (
                 <>
                   <div style={{ fontSize: "12px", color: "#d32f2f", textTransform: "uppercase", letterSpacing: "0.1em", marginTop: "16px", marginBottom: "8px" }}>Prix final (-{form.reduction_pourcentage}%)</div>
-                  <div style={{ fontSize: "24px", fontWeight: "bold", color: "#d32f2f" }}>
+                  <div style={{ fontSize: "24px", fontWeight: 500, color: "#d32f2f" }}>
                     {apercu.prix_final} FCFA
                   </div>
                 </>

@@ -73,7 +73,7 @@
   gap: 28px;
 }
 .compte,
-.tri span {
+.tri > span {
   font-family: var(--font-sans);
   font-size: 10px;
   letter-spacing: 0.16em;
@@ -112,18 +112,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
-}
-.tri select {
-  appearance: none;
-  border: none;
-  border-bottom: 1px solid var(--color-line);
-  background: transparent url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%278%27 height=%275%27%3E%3Cpath d=%27M0 0l4 5 4-5z%27 fill=%27%23b08d57%27/%3E%3C/svg%3E") no-repeat right center;
-  padding: 6px 18px 6px 0;
-  font-family: var(--font-body);
-  font-size: 15px;
-  color: var(--color-ink);
-  cursor: pointer;
-  outline: none;
 }
 
 /* Filtres actifs */
@@ -213,7 +201,7 @@
   .barre { gap: 16px; }
   .recherche { flex: 1 1 100%; }
   .actions { width: 100%; justify-content: space-between; gap: 12px; }
-  .tri span { display: none; }
+  .tri > span { display: none; }
   /* Deux cartes par ligne sur mobile, plutôt qu une carte pleine largeur */
   .grid { grid-template-columns: repeat(2, 1fr); gap: 44px 14px; }
 }

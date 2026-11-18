@@ -1,0 +1,132 @@
+.racine {
+  position: relative;
+  width: 100%;
+}
+
+.bouton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  cursor: pointer;
+  background: var(--color-white);
+  color: var(--color-ink);
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.4;
+  transition: border-color 0.25s ease;
+}
+.bouton:focus-visible {
+  outline: none;
+  border-color: var(--color-gold);
+}
+
+/* Formulaires : champ encadré */
+.champ .bouton {
+  border: 1px solid var(--color-line);
+  padding: 12px 14px;
+}
+.champ .bouton:hover {
+  border-color: var(--color-ink-soft);
+}
+
+/* Vitrine : simple soulignement (barre d'outils de la boutique) */
+.ligne {
+  width: auto;
+  min-width: 160px;
+}
+.ligne .bouton {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-line);
+  padding: 6px 0;
+}
+.ligne .bouton:hover {
+  border-color: var(--color-ink);
+}
+
+.placeholder {
+  color: var(--color-grey);
+}
+.valeur {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fleche {
+  flex-shrink: 0;
+  width: 7px;
+  height: 7px;
+  border-right: 1px solid var(--color-gold);
+  border-bottom: 1px solid var(--color-gold);
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.25s ease;
+}
+.flecheOuverte {
+  transform: translateY(2px) rotate(-135deg);
+}
+
+.liste {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  min-width: 180px;
+  z-index: 50;
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+  max-height: 280px;
+  overflow-y: auto;
+  background: var(--color-cream);
+  border: 1px solid var(--color-line);
+  box-shadow: 0 18px 40px rgba(10, 10, 10, 0.08);
+}
+.ligne .liste {
+  left: auto;
+}
+
+.option {
+  padding: 9px 16px;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--color-grey);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.optionActive {
+  background: var(--color-white);
+  color: var(--color-ink);
+}
+.optionChoisie {
+  color: var(--color-ink);
+}
+.optionChoisie::after {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-left: 10px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  vertical-align: middle;
+}
+
+/* Champ masqué servant uniquement à la validation « required » du formulaire */
+.validation {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.desactive .bouton {
+  cursor: default;
+  opacity: 0.5;
+}

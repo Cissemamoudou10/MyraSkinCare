@@ -328,7 +328,7 @@ export default function Orders() {
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '24px', paddingTop: '16px', borderTop: '2px solid var(--color-ink)' }}>
               <span style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Total</span>
-              <span style={{ fontSize: '18px', fontWeight: 'bold' }}>{formatPrice(selectedOrder.total)}</span>
+              <span style={{ fontSize: '18px', fontWeight: 500 }}>{formatPrice(selectedOrder.total)}</span>
             </div>
           </div>
         </div>

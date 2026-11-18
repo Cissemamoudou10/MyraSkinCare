@@ -1,3 +1,4 @@
+import Select from "@/components/ui/Select";
 import { useState, useEffect } from "react";
 import { fetchAvis, soumettreAvis } from "@/lib/api";
 
@@ -69,17 +70,18 @@ export default function Avis() {
             
             <div>
               <label style={{ display: "block", marginBottom: "0.5rem" }}>Note sur 5 *</label>
-              <select 
-                value={form.note} 
-                onChange={(e) => setForm({...form, note: parseInt(e.target.value)})}
-                style={{ width: "100%", padding: "0.8rem", border: "1px solid #ddd" }}
-              >
-                <option value="5">5 - Excellent</option>
-                <option value="4">4 - Très bien</option>
-                <option value="3">3 - Bien</option>
-                <option value="2">2 - Moyen</option>
-                <option value="1">1 - Décevant</option>
-              </select>
+              <Select
+                ariaLabel="Note"
+                value={form.note}
+                onChange={(v) => setForm({ ...form, note: v })}
+                options={[
+                  { value: 5, label: "5 — Excellent" },
+                  { value: 4, label: "4 — Très bien" },
+                  { value: 3, label: "3 — Bien" },
+                  { value: 2, label: "2 — Moyen" },
+                  { value: 1, label: "1 — Décevant" },
+                ]}
+              />
             </div>
 
             <div>

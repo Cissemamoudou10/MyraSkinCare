@@ -170,7 +170,7 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-ink);
-  font-weight: bold;
+  font-weight: 500;
   display: flex;
   align-items: center;
   gap: 8px;

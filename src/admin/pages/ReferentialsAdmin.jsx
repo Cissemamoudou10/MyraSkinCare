@@ -1,3 +1,4 @@
+import Select from "@/components/ui/Select";
 import { useState, useEffect } from "react";
 import { 
   fetchAdminMarques, fetchAdminCategories, fetchAdminProblemes, 
@@ -177,18 +178,16 @@ export default function ReferentialsAdmin() {
                   <label style={{ display: "block", marginBottom: "8px", fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-ink)" }}>
                     Rubrique parente
                   </label>
-                  <select
+                  <Select
                     value={form.parent_id || ""}
-                    onChange={(e) => setForm({ ...form, parent_id: e.target.value })}
-                    style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--color-line)", borderRadius: "4px", fontFamily: "var(--font-body)", fontSize: "14px" }}
-                  >
-                    <option value="">Aucune (rubrique principale)</option>
-                    {data
-                      .filter((c) => !c.parent_id && c.id !== form.id)
-                      .map((c) => (
-                        <option key={c.id} value={c.id}>{c.nom}</option>
-                      ))}
-                  </select>
+                    onChange={(v) => setForm({ ...form, parent_id: v })}
+                    options={[
+                      { value: "", label: "Aucune (rubrique principale)" },
+                      ...data
+                        .filter((c) => !c.parent_id && c.id !== form.id)
+                        .map((c) => ({ value: c.id, label: c.nom })),
+                    ]}
+                  />
                 </div>
                 <div style={{ width: "90px" }}>
                   <label style={{ display: "block", marginBottom: "8px", fontFamily: "var(--font-sans)", fontSize: "10px", letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--color-ink)" }}>

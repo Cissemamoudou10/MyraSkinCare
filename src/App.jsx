@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import RemonterEnHaut from "@/components/layout/RemonterEnHaut";
 
 import { CartProvider } from "@/context/CartContext";
 import SiteLayout from "@/components/layout/SiteLayout";
@@ -40,6 +41,7 @@ export default function App() {
         <ProductModalProvider>
           <AuthProvider>
             <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+              <RemonterEnHaut />
               <Routes>
                 {/* ---------- FRONT (vitrine) ---------- */}
                 <Route element={<SiteLayout />}>

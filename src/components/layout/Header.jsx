@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useNav } from "@/context/NavContext";
 import NavItem from "./NavItem";
+import RechercheRapide from "@/components/recherche/RechercheRapide";
 import { SearchIcon, CartIcon, MenuIcon } from "@/components/ui/icons";
 import logo from "@/assets/logo-myra.png";
 import styles from "./Header.module.css";
 
 export default function Header({ onMenu, onSearch, onCart, cartCount = 0 }) {
   const [solid, setSolid] = useState(false);
-  const [query, setQuery] = useState("");
-  const navigate = useNavigate();
   const { nav } = useNav();
 
   useEffect(() => {
@@ -17,13 +16,6 @@ export default function Header({ onMenu, onSearch, onCart, cartCount = 0 }) {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const handleSearch = (e) => {
-    if (e.key === "Enter" && query.trim()) {
-      navigate(`/recherche?q=${encodeURIComponent(query)}`);
-      setQuery("");
-    }
-  };
 
   return (
     <div className={styles.fixed}>
@@ -45,13 +37,7 @@ export default function Header({ onMenu, onSearch, onCart, cartCount = 0 }) {
           </Link>
 
           <div className={styles.searchDesktop}>
-            <SearchIcon size={17} stroke="var(--color-grey)" />
-            <input 
-              placeholder="Rechercher un soin…" 
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              onKeyDown={handleSearch}
-            />
+            <RechercheRapide variante="entete" />
           </div>
 
           <button onClick={onSearch} className={styles.searchMobile} aria-label="Rechercher">

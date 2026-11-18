@@ -1,3 +1,5 @@
+import Select from "@/components/ui/Select";
+import { categoriesEnArbre } from "@/lib/categories";
 import { urlImage } from "@/lib/images";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
@@ -183,21 +185,23 @@ export default function ProductForm() {
           <div className={styles.fieldGroup}>
             <div className={styles.field}>
               <label className={styles.label}>Catégorie</label>
-              <select className={styles.select} value={form.categorie_id} onChange={set("categorie_id")} required>
-                <option value="">Sélectionnez...</option>
-                {categories.map((c) => (
-                  <option key={c.id} value={c.id}>{c.nom}</option>
-                ))}
-              </select>
+              <Select
+                required
+                placeholder="Sélectionnez…"
+                value={form.categorie_id}
+                onChange={(v) => setForm({ ...form, categorie_id: v })}
+                options={categoriesEnArbre(categories).map(({ categorie, enfant }) => ({ value: categorie.id, label: enfant ? `— ${categorie.nom}` : categorie.nom }))}
+              />
             </div>
             <div className={styles.field}>
               <label className={styles.label}>Marque</label>
-              <select className={styles.select} value={form.marque_id} onChange={set("marque_id")} required>
-                <option value="">Sélectionnez...</option>
-                {marques.map((m) => (
-                  <option key={m.id} value={m.id}>{m.nom}</option>
-                ))}
-              </select>
+              <Select
+                required
+                placeholder="Sélectionnez…"
+                value={form.marque_id}
+                onChange={(v) => setForm({ ...form, marque_id: v })}
+                options={marques.map((m) => ({ value: m.id, label: m.nom }))}
+              />
             </div>
           </div>
 

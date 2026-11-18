@@ -1,3 +1,4 @@
+import Select from "@/components/ui/Select";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { ProductCard } from "@/components/ui/ProductCard";
@@ -7,6 +8,7 @@ import { SearchIcon } from "@/components/ui/icons";
 import {
   fetchProduits, fetchCategories, fetchProblemes, fetchMarques, fetchTypesPeau, fetchTags, fetchActifs,
 } from "@/lib/api";
+import { categoriesEnArbre } from "@/lib/categories";
 import styles from "./Boutique.module.css";
 
 const PAR_PAGE = 12;
@@ -45,17 +47,8 @@ function useReferentiels() {
 }
 
 // Catégories en arbre (rubrique puis ses sous-rubriques), dans l'ordre du menu
-function optionsCategories(categories) {
-  const parOrdre = (a, b) => (a.ordre ?? 0) - (b.ordre ?? 0) || a.nom.localeCompare(b.nom);
-  const racines = categories.filter((c) => !c.parent_id).sort(parOrdre);
-  return racines.flatMap((racine) => [
-    { valeur: String(racine.id), label: racine.nom },
-    ...categories
-      .filter((c) => c.parent_id === racine.id)
-      .sort(parOrdre)
-      .map((c) => ({ valeur: String(c.id), label: c.nom, enfant: true })),
-  ]);
-}
+const optionsCategories = (categories) =>
+  categoriesEnArbre(categories).map(({ categorie, enfant }) => ({ valeur: String(categorie.id), label: categorie.nom, enfant }));
 
 export default function Boutique() {
   const [params, setParams] = useSearchParams();
@@ -85,6 +78,12 @@ export default function Boutique() {
       return suivants;
     });
   }, [setParams]);
+
+  // Recherche lancée depuis l'en-tête (ou lien) : le champ local suit l'URL
+  const qUrl = params.get("q") || "";
+  useEffect(() => {
+    setRecherche((actuelle) => (actuelle.trim() === qUrl ? actuelle : qUrl));
+  }, [qUrl]);
 
   // Recherche : l'URL n'est mise à jour qu'après une courte pause de frappe
   useEffect(() => {
@@ -144,8 +143,8 @@ export default function Boutique() {
 
   // Titre de page : le premier filtre actif donne le contexte (arrivée depuis le menu)
   const contexte = filtresActifs[0];
-  const surtitre = nouveautes ? "Arrivages récents" : contexte ? TITRES_FILTRES[contexte.cle] : "La boutique";
-  const titre = nouveautes ? "Nos nouveautés" : contexte ? contexte.label : "Tous nos soins";
+  const surtitre = qUrl ? "Recherche" : nouveautes ? "Arrivages récents" : contexte ? TITRES_FILTRES[contexte.cle] : "La boutique";
+  const titre = qUrl ? `« ${qUrl} »` : nouveautes ? "Nos nouveautés" : contexte ? contexte.label : "Tous nos soins";
 
   const effacerTout = () => {
     setRecherche("");
@@ -191,11 +190,13 @@ export default function Boutique() {
             </button>
             <label className={styles.tri}>
               <span>Trier</span>
-              <select value={tri.valeur} onChange={(e) => majParams({ tri: e.target.value })}>
-                {TRIS.map((t) => (
-                  <option key={t.valeur} value={t.valeur}>{t.label}</option>
-                ))}
-              </select>
+              <Select
+                variant="ligne"
+                ariaLabel="Trier"
+                value={tri.valeur}
+                onChange={(v) => majParams({ tri: v })}
+                options={TRIS.map((t) => ({ value: t.valeur, label: t.label }))}
+              />
             </label>
           </div>
         </div>
