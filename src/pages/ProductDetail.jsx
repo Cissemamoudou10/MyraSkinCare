@@ -1,3 +1,4 @@
+import FilAriane from "@/components/ui/FilAriane";
 import { urlImage } from "@/lib/images";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
@@ -75,14 +76,16 @@ export default function ProductDetail() {
 
   return (
     <div className={styles.container}>
-      <nav className={styles.breadcrumb}>
-        <Link to="/">Accueil</Link> /{" "}
-        <Link to="/boutique">Boutique</Link> /{" "}
-        <Link to={`/boutique?categorie=${product.categorie?.nom || ''}`}>
-          {product.categorie?.nom || "Non classé"}
-        </Link> /{" "}
-        <span style={{ color: "var(--color-ink)", fontWeight: 500 }}>{product.nom || product.name}</span>
-      </nav>
+      <div className={styles.filConteneur}>
+        <FilAriane
+          etapes={[
+            { label: "Accueil", to: "/" },
+            { label: "Boutique", to: "/boutique" },
+            ...(product.categorie ? [{ label: product.categorie.nom, to: `/boutique?categorie=${product.categorie.id}` }] : []),
+            { label: product.nom || product.name },
+          ]}
+        />
+      </div>
 
       <div className={styles.layout}>
         {/* Image (Gauche) */}

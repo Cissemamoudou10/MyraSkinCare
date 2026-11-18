@@ -82,7 +82,7 @@
 .btn {
   display: block;
   width: 100%;
-  padding: 1.2rem;
+  padding: 14px;
   background: var(--color-ink);
   color: var(--color-cream);
   font-family: var(--font-sans);
@@ -106,7 +106,7 @@
 .btnGhost {
   display: block;
   width: 100%;
-  padding: 1.2rem;
+  padding: 14px;
   background: transparent;
   color: var(--color-ink);
   font-family: var(--font-sans);

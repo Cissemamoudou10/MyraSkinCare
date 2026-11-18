@@ -1,3 +1,4 @@
+import FilAriane from "@/components/ui/FilAriane";
 import Select from "@/components/ui/Select";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
@@ -159,11 +160,7 @@ export default function Boutique() {
   return (
     <div className={styles.page}>
       <div className="container">
-        <nav className={styles.breadcrumb}>
-          <Link to="/">Accueil</Link>
-          <span className={styles.sep}>/</span>
-          <span className={styles.current}>Boutique</span>
-        </nav>
+        <FilAriane etapes={[{ label: "Accueil", to: "/" }, { label: "Boutique" }]} />
 
         <header className={styles.head}>
           <p className={styles.eyebrow}>{surtitre}</p>

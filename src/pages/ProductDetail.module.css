@@ -6,24 +6,8 @@
   padding: calc(var(--header-height) + 40px) 1rem 6rem;
 }
 
-.breadcrumb {
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
-  color: var(--color-grey);
-  margin-bottom: 2rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
 
-.breadcrumb a {
-  color: var(--color-ink);
-  text-decoration: none;
-  transition: color 0.2s;
-}
 
-.breadcrumb a:hover {
-  color: var(--color-gold);
-}
 
 .layout {
   display: flex;
@@ -134,9 +118,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid var(--color-ink);
-  height: 56px;
-  width: 120px;
+  border: 1px solid var(--color-line);
+  height: 46px;
+  width: 112px;
   flex-shrink: 0;
 }
 
@@ -165,7 +149,7 @@
 
 .addBtn {
   flex-grow: 1;
-  height: 56px;
+  height: 46px;
   background-color: var(--color-ink);
   color: var(--color-cream);
   border: 1px solid var(--color-ink);
@@ -244,7 +228,7 @@
 
 .notFound {
   text-align: center;
-  padding: 4rem 1rem;
+  padding: calc(var(--header-height) + 60px) 1rem 4rem;
 }
 .notFound h2 {
   font-family: var(--font-serif);
@@ -271,15 +255,16 @@
   opacity: 0.8;
 }
 
+/* Le fil d'Ariane (composant FilAriane) garde la marge du texte sur téléphone */
+.filConteneur {}
+
 /* Téléphone : image moins haute, titre plus petit, actions compactes */
 @media (max-width: 640px) {
   .container {
     padding: calc(var(--header-height) + 16px) 0 4rem;
   }
-  .breadcrumb {
+  .filConteneur {
     padding: 0 22px;
-    font-size: 10px;
-    line-height: 1.6;
   }
   .imageCol {
     height: 320px;
@@ -298,10 +283,10 @@
     margin-bottom: 2.25rem;
   }
   .qtyWrapper {
-    width: 104px;
-    height: 50px;
+    width: 100px;
+    height: 46px;
   }
   .addBtn {
-    height: 50px;
+    height: 46px;
   }
 }

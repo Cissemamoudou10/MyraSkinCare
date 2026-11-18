@@ -1,3 +1,4 @@
+import FilAriane from "@/components/ui/FilAriane";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { fetchKitParSlug } from "@/lib/api";
@@ -54,13 +55,7 @@ export default function KitDetail() {
   return (
     <div className={styles.page}>
       <div className="container">
-        <nav className={styles.fil}>
-          <Link to="/">Accueil</Link>
-          <span>/</span>
-          <Link to="/nos-kits">Nos kits</Link>
-          <span>/</span>
-          <span className={styles.filActuel}>{kit.nom}</span>
-        </nav>
+        <FilAriane etapes={[{ label: "Accueil", to: "/" }, { label: "Nos kits", to: "/nos-kits" }, { label: kit.nom }]} />
 
         <div className={styles.grille}>
           <div className={`${styles.mosaique} ${styles[`mosaique${photos.length}`] || ""}`}>

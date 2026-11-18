@@ -1,3 +1,4 @@
+import FilAriane from "@/components/ui/FilAriane";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { KitCard } from "@/components/ui/KitCard";
@@ -20,11 +21,7 @@ export default function Kits() {
   return (
     <div className={styles.page}>
       <div className="container">
-        <nav className={styles.breadcrumb}>
-          <Link to="/">Accueil</Link>
-          <span className={styles.sep}>/</span>
-          <span className={styles.current}>Nos kits</span>
-        </nav>
+        <FilAriane etapes={[{ label: "Accueil", to: "/" }, { label: "Nos kits" }]} />
 
         <header className={styles.head}>
           <p className={styles.eyebrow}>Routines composées</p>

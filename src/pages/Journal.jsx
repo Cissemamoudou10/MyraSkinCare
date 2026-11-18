@@ -1,3 +1,4 @@
+import FilAriane from "@/components/ui/FilAriane";
 import { useState, useEffect } from "react";
 import { fetchPublicArticles } from "@/lib/api";
 import { X } from "lucide-react";
@@ -33,11 +34,7 @@ export default function Journal() {
   return (
     <div className={styles.page}>
       <div className={styles.container}>
-        <nav className={styles.breadcrumb}>
-          <span>Accueil</span>
-          <span className={styles.sep}>/</span>
-          <span className={styles.current}>Le Journal Myra</span>
-        </nav>
+        <FilAriane etapes={[{ label: "Accueil", to: "/" }, { label: "Le journal" }]} />
 
         <header className={styles.header}>
           <p className={styles.eyebrow}>Expertise & Conseils</p>

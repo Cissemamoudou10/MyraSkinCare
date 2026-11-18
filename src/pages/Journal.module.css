@@ -8,19 +8,6 @@
   padding: 0 24px;
 }
 
-.breadcrumb {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: var(--font-sans);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--color-grey);
-  margin-bottom: 40px;
-}
-.sep { color: var(--color-line); }
-.current { color: var(--color-ink); }
 
 .header {
   text-align: center;
@@ -55,33 +42,32 @@
 .filters {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 12px 28px;
   margin-bottom: 48px;
   flex-wrap: wrap;
 }
 
 .filterBtn {
   background: transparent;
-  border: 1px solid var(--color-line);
-  padding: 8px 24px;
-  border-radius: 30px;
+  border: none;
+  border-bottom: 1px solid transparent;
+  padding: 4px 0;
   font-family: var(--font-sans);
-  font-size: 11px;
-  letter-spacing: 0.1em;
+  font-size: 10px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-ink);
+  color: var(--color-grey);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: color 0.25s ease, border-color 0.25s ease;
 }
 
 .filterBtn:hover {
-  border-color: var(--color-ink);
+  color: var(--color-ink);
 }
 
 .activeFilter {
-  background: var(--color-ink);
-  color: var(--color-cream);
-  border-color: var(--color-ink);
+  color: var(--color-ink);
+  border-bottom-color: var(--color-ink);
 }
 
 .grid {
