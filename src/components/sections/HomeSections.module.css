@@ -297,9 +297,20 @@
   .editorialMosaic { min-height: 360px; }
 }
 
+/* Kits : une carte plus large que les produits */
+.kitsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 60px 40px;
+}
+
 @media (max-width: 640px) {
-  .productGrid { gap: 40px 20px; }
-  .miniGrid { gap: 40px 20px; }
+  /* Deux cartes par ligne sur téléphone, plutôt qu une carte pleine largeur */
+  .productGrid,
+  .miniGrid,
+  .concernsGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 14px; }
+  .kitsGrid { gap: 48px; }
+  .concernLabel span { font-size: 16px; }
   .padCream, .padWhite { padding: 60px 0; }
   .editorialImg { min-height: 250px; }
   .editorialText { padding: 50px 5vw; }

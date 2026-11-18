@@ -1,3 +1,4 @@
+import { urlImage } from "@/lib/images";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { fetchProblemes } from "@/lib/api";
@@ -36,7 +37,7 @@ export default function Concerns() {
                 <Link to={`/boutique?probleme=${p.slug}`} className={styles.card}>
                   <div className={styles.imageContainer}>
                     {p.image_url ? (
-                      <img src={p.image_url} alt={p.nom} className={styles.image} />
+                      <img src={urlImage(p.image_url)} alt={p.nom} className={styles.image} />
                     ) : (
                       <div className={styles.placeholderImage}>
                         <span>{p.nom}</span>

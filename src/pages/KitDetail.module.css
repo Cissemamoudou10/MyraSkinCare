@@ -1,0 +1,236 @@
+.page {
+  padding: calc(var(--header-height) + 50px) 0 100px;
+}
+
+.fil {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 40px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-grey);
+}
+.fil a {
+  color: inherit;
+  text-decoration: none;
+}
+.fil a:hover {
+  color: var(--color-ink);
+}
+.fil span {
+  color: var(--color-line);
+}
+.fil .filActuel {
+  color: var(--color-ink);
+}
+
+.grille {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 72px;
+  align-items: start;
+}
+
+/* Mosaïque des produits du kit : taille contenue, jamais pleine page */
+.mosaique {
+  position: relative;
+  display: grid;
+  gap: 1px;
+  aspect-ratio: 1 / 1;
+  max-width: 520px;
+  width: 100%;
+  background: var(--color-line);
+  border: 1px solid var(--color-line);
+}
+.mosaique2 {
+  grid-template-columns: 1fr 1fr;
+}
+.mosaique3 {
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: 1fr 1fr;
+}
+.mosaique3 .case:first-child {
+  grid-row: span 2;
+}
+.case {
+  background: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.case img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 14%;
+}
+.remise {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: var(--color-ink);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  padding: 6px 10px;
+}
+
+.infos {
+  max-width: 460px;
+}
+.surtitre {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 14px;
+}
+.titre {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--color-ink);
+  margin-bottom: 14px;
+}
+.prix {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  color: var(--color-ink);
+  margin-bottom: 26px;
+}
+.prixBarre {
+  color: var(--color-grey);
+  text-decoration: line-through;
+  margin-right: 10px;
+}
+.description {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--color-grey);
+  margin-bottom: 30px;
+}
+
+.ajouter {
+  width: 100%;
+  cursor: pointer;
+  background: var(--color-ink);
+  color: var(--color-cream);
+  border: 1px solid var(--color-ink);
+  padding: 16px 20px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+}
+.ajouter:hover {
+  background: transparent;
+  color: var(--color-ink);
+}
+.ajouter:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.contenu {
+  margin-top: 44px;
+  border-top: 1px solid var(--color-line);
+  padding-top: 24px;
+}
+.contenuTitre {
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  margin-bottom: 10px;
+}
+.liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.liste li + li {
+  border-top: 1px solid var(--color-line);
+}
+.produit {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 0;
+  text-decoration: none;
+}
+.vignette {
+  flex-shrink: 0;
+  width: 54px;
+  height: 64px;
+  background: var(--color-white);
+  border: 1px solid var(--color-line);
+}
+.vignette img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 5px;
+}
+.produitNom {
+  flex: 1;
+  font-family: var(--font-serif);
+  font-size: 17px;
+  line-height: 1.3;
+  color: var(--color-ink);
+}
+.produit:hover .produitNom {
+  color: var(--color-gold);
+}
+.produitQte {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  color: var(--color-grey);
+}
+
+.introuvable {
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--color-grey);
+}
+.lienDiscret {
+  display: inline-block;
+  margin-top: 16px;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+@media (max-width: 860px) {
+  .page {
+    padding-top: calc(var(--header-height) + 24px);
+  }
+  .fil {
+    margin-bottom: 22px;
+  }
+  .grille {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .mosaique {
+    max-width: none;
+  }
+  .infos {
+    max-width: none;
+  }
+}

@@ -30,18 +30,12 @@ export default function Ingredients() {
         {loading ? (
           <p style={{ textAlign: "center", color: "var(--color-grey)" }}>Chargement...</p>
         ) : (
-          <div className={styles.grid}>
-            {actifs.map((a, i) => (
-              <Reveal key={a.id} delay={(i % 4) * 0.1}>
-                <Link to={`/boutique?actif=${a.slug}`} className={styles.card}>
-                  <div className={styles.imageContainer} style={{ aspectRatio: '1' }}>
-                    <div className={styles.placeholderImage}>
-                      <span style={{ fontSize: '1.25rem', padding: '1rem' }}>{a.nom}</span>
-                    </div>
-                  </div>
-                  <h3 className={styles.cardTitle}>{a.nom}</h3>
-                </Link>
-              </Reveal>
+          <div className={styles.tuiles}>
+            {actifs.map((a) => (
+              <Link key={a.id} to={`/boutique?actif=${a.slug}`} className={styles.tuile}>
+                <span className={styles.tuileNom}>{a.nom}</span>
+                <span className={styles.tuileLien}>Voir les soins →</span>
+              </Link>
             ))}
           </div>
         )}

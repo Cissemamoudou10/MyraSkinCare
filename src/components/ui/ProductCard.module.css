@@ -146,6 +146,11 @@
   line-height: 1.5;
   color: var(--color-grey);
   margin-bottom: 10px;
+  /* Deux lignes au plus : cartes régulières, surtout sur téléphone */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .price {
   font-family: var(--font-sans);

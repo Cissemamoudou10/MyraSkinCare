@@ -2,7 +2,8 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1rem 6rem;
+  /* L'en-tête est fixe : on réserve sa hauteur */
+  padding: calc(var(--header-height) + 40px) 1rem 6rem;
 }
 
 .breadcrumb {
@@ -28,7 +29,6 @@
   display: flex;
   flex-direction: column;
   background-color: var(--color-cream);
-  border-radius: 8px; /* Slight rounding for modern feel */
   overflow: hidden;
 }
 
@@ -82,9 +82,10 @@
 }
 
 .category {
+  font-family: var(--font-sans);
   text-transform: uppercase;
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
+  font-size: 10px;
+  letter-spacing: 0.18em;
   color: var(--color-grey);
   margin-bottom: 0.5rem;
 }
@@ -107,15 +108,18 @@
 }
 
 .price {
-  font-size: 1.25rem;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  letter-spacing: 0.06em;
   color: var(--color-ink);
 }
 
 .description {
-  color: var(--color-ink-light);
-  line-height: 1.6;
-  margin-bottom: 3rem;
-  font-size: 1rem;
+  font-family: var(--font-body);
+  color: var(--color-grey);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  font-size: 16px;
 }
 
 .actions {
@@ -165,9 +169,10 @@
   background-color: var(--color-ink);
   color: var(--color-cream);
   border: 1px solid var(--color-ink);
-  font-size: 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.18em;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
@@ -201,16 +206,18 @@
 }
 
 .detailLabel {
-  font-size: 0.7rem;
+  font-family: var(--font-sans);
+  font-size: 9px;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.18em;
   color: var(--color-grey);
   margin-bottom: 0.5rem;
   font-weight: 500;
 }
 
 .detailValue {
-  font-size: 0.95rem;
+  font-family: var(--font-body);
+  font-size: 15px;
   color: var(--color-ink);
   line-height: 1.5;
 }
@@ -262,4 +269,39 @@
 }
 .backBtn:hover {
   opacity: 0.8;
+}
+
+/* Téléphone : image moins haute, titre plus petit, actions compactes */
+@media (max-width: 640px) {
+  .container {
+    padding: calc(var(--header-height) + 16px) 0 4rem;
+  }
+  .breadcrumb {
+    padding: 0 22px;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  .imageCol {
+    height: 320px;
+  }
+  .infoCol {
+    padding: 1.75rem 22px;
+  }
+  .title {
+    font-size: 30px;
+  }
+  .header {
+    margin-bottom: 1.5rem;
+  }
+  .actions {
+    gap: 10px;
+    margin-bottom: 2.25rem;
+  }
+  .qtyWrapper {
+    width: 104px;
+    height: 50px;
+  }
+  .addBtn {
+    height: 50px;
+  }
 }

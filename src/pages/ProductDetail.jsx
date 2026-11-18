@@ -141,7 +141,7 @@ export default function ProductDetail() {
               disabled={product.stock === 0}
               style={{ opacity: product.stock === 0 ? 0.5 : 1, cursor: product.stock === 0 ? 'not-allowed' : 'pointer' }}
             >
-              {product.stock === 0 ? "Rupture de stock" : `Ajouter au panier — ${formatPrice((product.prix || product.price) * qty)}`}
+              {product.stock === 0 ? "Rupture de stock" : "Ajouter au panier"}
             </button>
           </div>
 

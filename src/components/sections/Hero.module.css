@@ -68,8 +68,16 @@
   .hero {
     min-height: 500px;
   }
-  .tile:nth-child(n + 3) {
+  /* Deux petites vignettes dans les coins du haut, rien sous le texte ni le bouton */
+  .tile:nth-child(2),
+  .tile:nth-child(n + 4) {
     display: none;
+  }
+  .tile {
+    max-width: 92px;
+  }
+  .content {
+    padding: 32px 22px;
   }
   .title {
     font-size: clamp(36px, 10vw, 64px);

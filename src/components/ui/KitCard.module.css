@@ -119,3 +119,7 @@
   border-color: var(--color-line);
   cursor: default;
 }
+
+@media (max-width: 640px) {
+  .mosaique { aspect-ratio: 1 / 1; }
+}

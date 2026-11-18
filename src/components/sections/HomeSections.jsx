@@ -133,7 +133,7 @@ export function Kits() {
           sub="Des routines complètes, composées pour vous, à adopter en une fois."
         />
       </Reveal>
-      <div className={`container ${styles.productGrid}`}>
+      <div className={`container ${styles.kitsGrid}`}>
         {kits.map((kit, i) => (
           <Reveal key={kit.id} delay={(i % 3) * 0.1}>
             <KitCard kit={kit} />

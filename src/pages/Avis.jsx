@@ -1,133 +1,116 @@
-import Select from "@/components/ui/Select";
 import { useState, useEffect } from "react";
+import Select from "@/components/ui/Select";
+import SectionHead from "@/components/ui/SectionHead";
 import { fetchAvis, soumettreAvis } from "@/lib/api";
+import styles from "./Avis.module.css";
+
+const NOTES = [
+  { value: 5, label: "5 — Excellent" },
+  { value: 4, label: "4 — Très bien" },
+  { value: 3, label: "3 — Bien" },
+  { value: 2, label: "2 — Moyen" },
+  { value: 1, label: "1 — Décevant" },
+];
+const VIDE = { nom_client: "", email: "", note: 5, commentaire: "" };
 
 export default function Avis() {
   const [avis, setAvis] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [form, setForm] = useState({ nom_client: "", email: "", note: 5, commentaire: "" });
-  const [submitting, setSubmitting] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [chargement, setChargement] = useState(true);
+  const [form, setForm] = useState(VIDE);
+  const [envoi, setEnvoi] = useState(false);
+  const [envoye, setEnvoye] = useState(false);
+  const [erreur, setErreur] = useState("");
 
   useEffect(() => {
     fetchAvis()
-      .then(res => setAvis(res.data || []))
-      .catch(err => console.error(err))
-      .finally(() => setLoading(false));
+      .then((res) => setAvis(res.data || []))
+      .catch((err) => console.error(err))
+      .finally(() => setChargement(false));
   }, []);
 
-  const handleSubmit = async (e) => {
+  const champ = (cle) => (e) => setForm({ ...form, [cle]: e.target.value });
+
+  const envoyer = async (e) => {
     e.preventDefault();
-    setSubmitting(true);
+    setEnvoi(true);
+    setErreur("");
     try {
       await soumettreAvis(form);
-      setSuccess(true);
-      setForm({ nom_client: "", email: "", note: 5, commentaire: "" });
+      setEnvoye(true);
+      setForm(VIDE);
     } catch (err) {
-      console.error(err);
-      alert("Erreur lors de l'envoi de votre avis. Veuillez réessayer.");
+      setErreur(err?.response?.data?.message || "L'envoi a échoué. Veuillez réessayer.");
     } finally {
-      setSubmitting(false);
+      setEnvoi(false);
     }
   };
 
   return (
-    <div style={{ padding: "120px 5% 5%", maxWidth: "800px", margin: "0 auto" }}>
-      <h1 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>Avis Clients</h1>
-      <p style={{ color: "var(--color-grey)", marginBottom: "3rem" }}>
-        Découvrez ce que nos clients pensent de nos soins et partagez votre propre expérience.
-      </p>
+    <div className={styles.page}>
+      <div className="container-narrow">
+        <SectionHead
+          eyebrow="Témoignages"
+          title="Avis clients"
+          sub="Découvrez ce que nos clientes pensent de nos soins, et partagez votre expérience."
+        />
 
-      <div style={{ marginBottom: "4rem", background: "#f9f9f9", padding: "2rem", borderRadius: "10px" }}>
-        <h2 style={{ fontSize: "1.5rem", marginBottom: "1.5rem" }}>Laissez votre avis</h2>
-        {success ? (
-          <div style={{ color: "green", padding: "1rem", border: "1px solid green", borderRadius: "5px" }}>
-            Merci pour votre avis ! Il sera visible très bientôt après validation.
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-            <div style={{ display: "flex", gap: "1rem" }}>
-              <div style={{ flex: 1 }}>
-                <label style={{ display: "block", marginBottom: "0.5rem" }}>Nom *</label>
-                <input 
-                  required 
-                  value={form.nom_client} 
-                  onChange={(e) => setForm({...form, nom_client: e.target.value})} 
-                  style={{ width: "100%", padding: "0.8rem", border: "1px solid #ddd" }}
-                />
-              </div>
-              <div style={{ flex: 1 }}>
-                <label style={{ display: "block", marginBottom: "0.5rem" }}>Email (ne sera pas publié) *</label>
-                <input 
-                  required 
-                  type="email" 
-                  value={form.email} 
-                  onChange={(e) => setForm({...form, email: e.target.value})} 
-                  style={{ width: "100%", padding: "0.8rem", border: "1px solid #ddd" }}
-                />
-              </div>
-            </div>
-            
-            <div>
-              <label style={{ display: "block", marginBottom: "0.5rem" }}>Note sur 5 *</label>
-              <Select
-                ariaLabel="Note"
-                value={form.note}
-                onChange={(v) => setForm({ ...form, note: v })}
-                options={[
-                  { value: 5, label: "5 — Excellent" },
-                  { value: 4, label: "4 — Très bien" },
-                  { value: 3, label: "3 — Bien" },
-                  { value: 2, label: "2 — Moyen" },
-                  { value: 1, label: "1 — Décevant" },
-                ]}
-              />
-            </div>
-
-            <div>
-              <label style={{ display: "block", marginBottom: "0.5rem" }}>Votre avis *</label>
-              <textarea 
-                required 
-                rows="4" 
-                value={form.commentaire} 
-                onChange={(e) => setForm({...form, commentaire: e.target.value})} 
-                style={{ width: "100%", padding: "0.8rem", border: "1px solid #ddd", fontFamily: "inherit" }}
-              />
-            </div>
-
-            <button 
-              type="submit" 
-              disabled={submitting}
-              style={{ padding: "1rem 2rem", background: "var(--color-ink)", color: "white", border: "none", cursor: submitting ? "not-allowed" : "pointer" }}
-            >
-              {submitting ? "Envoi en cours..." : "Soumettre mon avis"}
-            </button>
-          </form>
-        )}
-      </div>
-
-      <h2 style={{ fontSize: "2rem", marginBottom: "2rem" }}>Avis récents</h2>
-      {loading ? (
-        <p>Chargement des avis...</p>
-      ) : avis.length === 0 ? (
-        <p>Aucun avis publié pour le moment. Soyez le premier !</p>
-      ) : (
-        <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-          {avis.map(a => (
-            <div key={a.id} style={{ borderBottom: "1px solid #eee", paddingBottom: "1.5rem" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "0.5rem" }}>
-                <strong>{a.nom_client}</strong>
-                <span style={{ color: "gold", fontSize: "1.2rem" }}>
-                  {"★".repeat(a.note)}{"☆".repeat(5 - a.note)}
-                </span>
-              </div>
-              <p style={{ fontStyle: "italic", color: "var(--color-grey)", lineHeight: "1.6" }}>
-                « {a.commentaire} »
+        <div className={styles.colonnes}>
+          <section className={styles.formulaireBloc}>
+            <h2 className={styles.sousTitre}>Laissez votre avis</h2>
+            {envoye ? (
+              <p className={styles.merci}>
+                Merci pour votre avis ! Il sera publié après validation.
               </p>
-            </div>
-          ))}
+            ) : (
+              <form onSubmit={envoyer} className={styles.formulaire}>
+                <div className={styles.ligne}>
+                  <label className={styles.champ}>
+                    <span className={styles.etiquette}>Nom</span>
+                    <input required value={form.nom_client} onChange={champ("nom_client")} />
+                  </label>
+                  <label className={styles.champ}>
+                    <span className={styles.etiquette}>E-mail (non publié)</span>
+                    <input required type="email" value={form.email} onChange={champ("email")} />
+                  </label>
+                </div>
+                <div className={styles.champ}>
+                  <span className={styles.etiquette}>Note</span>
+                  <Select ariaLabel="Note" value={form.note} onChange={(v) => setForm({ ...form, note: v })} options={NOTES} />
+                </div>
+                <label className={styles.champ}>
+                  <span className={styles.etiquette}>Votre avis</span>
+                  <textarea required rows={5} value={form.commentaire} onChange={champ("commentaire")} />
+                </label>
+                {erreur && <p className={styles.erreur}>{erreur}</p>}
+                <button type="submit" className={styles.envoyer} disabled={envoi}>
+                  {envoi ? "Envoi…" : "Envoyer mon avis"}
+                </button>
+              </form>
+            )}
+          </section>
+
+          <section>
+            <h2 className={styles.sousTitre}>Avis récents</h2>
+            {chargement ? (
+              <p className={styles.texte}>Chargement…</p>
+            ) : avis.length === 0 ? (
+              <p className={styles.texte}>Aucun avis publié pour le moment. Soyez la première !</p>
+            ) : (
+              <ul className={styles.liste}>
+                {avis.map((a) => (
+                  <li key={a.id} className={styles.avis}>
+                    <p className={styles.etoiles} aria-label={`${a.note} sur 5`}>
+                      {"★".repeat(a.note)}{"☆".repeat(5 - a.note)}
+                    </p>
+                    <p className={styles.citation}>« {a.commentaire} »</p>
+                    <p className={styles.auteur}>{a.nom_client}</p>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
         </div>
-      )}
+      </div>
     </div>
   );
 }

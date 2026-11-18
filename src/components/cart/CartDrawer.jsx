@@ -5,7 +5,6 @@ import { useCart } from "@/context/CartContext";
 import { formatPrice } from "@/data/products";
 import { creerCommande } from "@/lib/api";
 import { CloseIcon } from "@/components/ui/icons";
-import Button from "@/components/ui/Button";
 import { useDialog } from "@/context/DialogContext";
 import styles from "./CartDrawer.module.css";
 
@@ -92,7 +91,7 @@ export default function CartDrawer() {
                 <div key={uid} className={styles.cartItem}>
                   <img src={getImgSrc(item.photo)} alt={item.nom} className={styles.itemImg} />
                   <div className={styles.itemInfo}>
-                    <h4 className={styles.itemName}>{item.nom} {item.isKit && <span style={{fontSize:'10px', color:'#d32f2f', marginLeft:'4px'}}>(Kit)</span>}</h4>
+                    <h4 className={styles.itemName}>{item.nom} {item.isKit && <span style={{ fontFamily: "var(--font-sans)", fontSize: "9px", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--color-gold)", marginLeft: "6px" }}>Kit</span>}</h4>
                     <p className={styles.itemPrice}>{formatPrice(item.prix)}</p>
                     <div className={styles.quantityControls}>
                       <button onClick={() => updateQuantity(uid, item.quantite - 1)}>-</button>
@@ -130,7 +129,7 @@ export default function CartDrawer() {
               <div className={styles.field}>
                 <label>Numéro WhatsApp</label>
                 <input required type="tel" value={form.whatsapp} onChange={e => setForm({...form, whatsapp: e.target.value})} placeholder="Ex: 70 12 34 56" />
-                <span style={{ fontSize: '10px', color: 'var(--color-grey)', marginTop: '-8px' }}>Saisissez votre numéro à 8 chiffres (l'indicatif +223 est géré automatiquement).</span>
+                <span className={styles.aide}>8 chiffres ; l'indicatif +223 est ajouté automatiquement.</span>
               </div>
               <div className={styles.field}>
                 <label>Quartier (Bamako)</label>
@@ -139,9 +138,9 @@ export default function CartDrawer() {
               
               <div className={styles.actions}>
                 <button type="button" onClick={() => setCheckoutStep(false)} className={styles.btnGhost}>Retour</button>
-                <Button type="submit" variant="solid" isLoading={loading}>
-                  Valider la commande
-                </Button>
+                <button type="submit" className={styles.btn} disabled={loading}>
+                  {loading ? "Envoi…" : "Valider la commande"}
+                </button>
               </div>
             </form>
           )}
