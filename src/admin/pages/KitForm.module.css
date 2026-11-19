@@ -1,0 +1,92 @@
+/* Compléments du formulaire de kit (le reste vient de ProductForm.module.css) */
+.texte {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-grey);
+  margin: 0;
+}
+
+.ligneProduit {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 96px 44px;
+  align-items: end;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.retirer {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid var(--color-line);
+  color: var(--color-grey);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.retirer:hover {
+  color: #b3261e;
+  border-color: #b3261e;
+}
+.ajouterProduit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--color-ink);
+  padding: 4px 0;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.promo {
+  margin-top: 16px;
+  padding-top: 18px;
+  border-top: 1px solid var(--color-line);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.apercu {
+  border-top: 1px solid var(--color-line);
+  padding-top: 14px;
+}
+.apercuLabel {
+  font-family: var(--font-sans);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-grey);
+  margin-bottom: 6px;
+}
+.prix,
+.prixBarre {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  letter-spacing: 0.04em;
+  color: var(--color-ink);
+  margin-bottom: 14px;
+}
+.prixBarre {
+  font-size: 14px;
+  color: var(--color-grey);
+  text-decoration: line-through;
+}
+
+.statut {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.statut h3 {
+  margin: 0;
+}

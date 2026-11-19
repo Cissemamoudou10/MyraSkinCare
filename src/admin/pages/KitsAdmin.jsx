@@ -59,7 +59,7 @@ export default function KitsAdmin() {
             placeholder="Rechercher un kit..." 
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            style={{ padding: '8px 12px', border: '1px solid var(--color-line)', borderRadius: '4px', fontFamily: 'var(--font-body)', fontSize: '13px', width: '250px' }}
+            style={{ padding: '8px 12px', border: '1px solid var(--color-line)', fontFamily: 'var(--font-body)', fontSize: '13px', width: '250px' }}
           />
           <Link to="/admin/kits/nouveau" className={styles.btnAdd}>
             <Plus size={16} /> Nouveau Kit
@@ -98,7 +98,7 @@ export default function KitsAdmin() {
                       <div style={{ fontSize: "11px", color: "var(--color-grey)", marginTop: "2px" }}>{k.slug}</div>
                     </td>
                     <td data-label="Produits">
-                      <span style={{ fontSize: "12px", background: "#f5f5f5", border: "1px solid #e0e0e0", padding: "4px 8px", borderRadius: "4px", display: "inline-flex", alignItems: "center", gap: "4px", color: "var(--color-ink)" }}>
+                      <span style={{ fontSize: "12px", background: "#f5f5f5", border: "1px solid #e0e0e0", padding: "4px 8px", display: "inline-flex", alignItems: "center", gap: "4px", color: "var(--color-ink)" }}>
                         <Package size={12} /> {k.produits ? k.produits.length : 0} articles
                       </span>
                     </td>
@@ -142,7 +142,7 @@ export default function KitsAdmin() {
 
       {selectedKit && (
         <div style={{ position: "fixed", top: 0, left: 0, right: 0, bottom: 0, backgroundColor: "rgba(0,0,0,0.5)", zIndex: 9999, display: "flex", alignItems: "center", justifyContent: "center" }} onClick={() => setSelectedKit(null)}>
-          <div style={{ background: "white", padding: "32px", borderRadius: "8px", width: "90%", maxWidth: "500px", maxHeight: "80vh", overflowY: "auto" }} onClick={e => e.stopPropagation()}>
+          <div style={{ background: "white", padding: "32px", width: "90%", maxWidth: "500px", maxHeight: "80vh", overflowY: "auto" }} onClick={e => e.stopPropagation()}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}>
               <h2 style={{ margin: 0, fontFamily: "var(--font-serif)" }}>Détails du kit</h2>
               <button onClick={() => setSelectedKit(null)} style={{ background: "none", border: "none", cursor: "pointer" }}><XCircle size={24} color="var(--color-grey)" /></button>
@@ -157,7 +157,7 @@ export default function KitsAdmin() {
               </div>
             )}
             
-            <div style={{ marginBottom: "16px", padding: "16px", background: "#f5f5f5", borderRadius: "4px" }}>
+            <div style={{ marginBottom: "16px", padding: "16px", background: "#f5f5f5" }}>
               <div style={{ marginBottom: "8px" }}><strong>Valeur réelle :</strong> {formatPrice(selectedKit.prix.prix_plein)}</div>
               {selectedKit.prix.en_promo && (
                 <div style={{ color: "#d32f2f", fontWeight: 500 }}>
@@ -171,7 +171,7 @@ export default function KitsAdmin() {
               {selectedKit.produits?.map((p) => (
                 <li key={p.id} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "8px 0", borderBottom: "1px solid var(--color-line)" }}>
                   <span style={{ fontSize: "14px" }}>{p.nom}</span>
-                  <span style={{ fontSize: "12px", background: "#eee", padding: "2px 6px", borderRadius: "4px" }}>x{p.KitProduit?.quantite || 1}</span>
+                  <span style={{ fontSize: "12px", background: "#eee", padding: "2px 6px" }}>x{p.KitProduit?.quantite || 1}</span>
                 </li>
               ))}
             </ul>

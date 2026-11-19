@@ -136,14 +136,14 @@ export default function Orders() {
             placeholder="Rechercher (Nom, WhatsApp, N°)..." 
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            style={{ padding: '8px 12px', border: '1px solid var(--color-line)', borderRadius: '4px', fontFamily: 'var(--font-body)', fontSize: '13px', width: '250px' }}
+            style={{ padding: '8px 12px', border: '1px solid var(--color-line)', fontFamily: 'var(--font-body)', fontSize: '13px', width: '250px' }}
           />
           <button 
             onClick={handleExportExcel}
             style={{ 
               display: 'flex', alignItems: 'center', gap: '8px', 
               padding: '8px 16px', background: 'var(--color-ink)', 
-              color: 'var(--color-white)', border: 'none', borderRadius: '4px',
+              color: 'var(--color-white)', border: 'none',
               fontFamily: 'var(--font-sans)', fontSize: '12px', textTransform: 'uppercase', 
               letterSpacing: '0.05em', cursor: 'pointer'
             }}
@@ -193,7 +193,7 @@ export default function Orders() {
                   <td className={styles.fw500} data-label="Commande">
                     {o.numero}
                     {o.source === 'boutique' && (
-                      <span style={{ fontSize: '9px', backgroundColor: 'var(--color-gold)', color: 'white', padding: '2px 4px', borderRadius: '4px', marginLeft: '6px', verticalAlign: 'middle', textTransform: 'uppercase' }}>POS</span>
+                      <span style={{ fontSize: '9px', backgroundColor: 'var(--color-gold)', color: 'white', padding: '2px 4px', marginLeft: '6px', verticalAlign: 'middle', textTransform: 'uppercase' }}>POS</span>
                     )}
                   </td>
                   <td data-label="Client">
@@ -265,9 +265,7 @@ export default function Orders() {
           <div style={{
             background: 'var(--color-white)',
             border: '1px solid var(--color-line)',
-            boxShadow: '0 8px 32px rgba(0,0,0,0.08)',
             padding: '32px',
-            borderRadius: '8px',
             maxWidth: '500px',
             width: '90%',
             maxHeight: '90vh',
@@ -308,7 +306,7 @@ export default function Orders() {
                       >
                         {l.nom_produit}
                       </Link>
-                      {l.type === 'kit' && <span style={{ fontSize: '10px', backgroundColor: 'var(--color-line)', padding: '2px 6px', borderRadius: '4px', marginLeft: '8px', textTransform: 'uppercase', verticalAlign: 'middle' }}>KIT</span>}
+                      {l.type === 'kit' && <span style={{ fontSize: '10px', backgroundColor: 'var(--color-line)', padding: '2px 6px', marginLeft: '8px', textTransform: 'uppercase', verticalAlign: 'middle' }}>KIT</span>}
                     </span>
                     <span style={{ fontWeight: 500 }}>{formatPrice(l.prix_unitaire * l.quantite)}</span>
                   </div>

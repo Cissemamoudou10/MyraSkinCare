@@ -5,17 +5,24 @@ import styles from "./Select.module.css";
 // - options : [{ value, label }] ; onChange reçoit la value de l'option choisie
 // - variant : "ligne" (souligné, vitrine) ou "champ" (encadré, formulaires admin)
 // - required : conserve la validation native du formulaire via un champ masqué
+// - recherche : ajoute un champ de filtre en tête de liste (longues listes)
+const normaliser = (t) => String(t).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+
 export default function Select({
   value, onChange, options, placeholder = "Choisir…", variant = "champ",
-  id, ariaLabel, required = false, disabled = false,
+  id, ariaLabel, required = false, disabled = false, recherche = false,
 }) {
   const [ouvert, setOuvert] = useState(false);
   const [actif, setActif] = useState(-1);
+  const [filtre, setFiltre] = useState("");
   const racine = useRef(null);
   const listeId = useId();
 
-  const indexChoisi = options.findIndex((o) => String(o.value) === String(value ?? ""));
-  const choisie = options[indexChoisi];
+  const choisie = options.find((o) => String(o.value) === String(value ?? ""));
+  const visibles = recherche && filtre.trim()
+    ? options.filter((o) => normaliser(o.label).includes(normaliser(filtre.trim())))
+    : options;
+  const indexChoisi = visibles.findIndex((o) => String(o.value) === String(value ?? ""));
 
   // Fermeture au clic en dehors
   useEffect(() => {
@@ -27,7 +34,8 @@ export default function Select({
 
   const ouvrir = () => {
     if (disabled) return;
-    setActif(indexChoisi >= 0 ? indexChoisi : 0);
+    setFiltre("");
+    setActif(Math.max(0, options.findIndex((o) => String(o.value) === String(value ?? ""))));
     setOuvert(true);
   };
 
@@ -49,13 +57,13 @@ export default function Select({
       setOuvert(false);
     } else if (e.key === "ArrowDown") {
       e.preventDefault();
-      setActif((i) => Math.min(options.length - 1, i + 1));
+      setActif((i) => Math.min(visibles.length - 1, i + 1));
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
       setActif((i) => Math.max(0, i - 1));
-    } else if (e.key === "Enter" || e.key === " ") {
+    } else if (e.key === "Enter" || (e.key === " " && !recherche)) {
       e.preventDefault();
-      if (options[actif]) choisir(options[actif]);
+      if (visibles[actif]) choisir(visibles[actif]);
     } else if (e.key === "Tab") {
       setOuvert(false);
     }
@@ -95,7 +103,20 @@ export default function Select({
 
       {ouvert && (
         <ul id={listeId} role="listbox" className={styles.liste}>
-          {options.map((option, i) => (
+          {recherche && (
+            <li className={styles.filtre}>
+              <input
+                autoFocus
+                value={filtre}
+                placeholder="Filtrer…"
+                onChange={(e) => { setFiltre(e.target.value); setActif(0); }}
+                onKeyDown={clavier}
+                aria-label="Filtrer la liste"
+              />
+            </li>
+          )}
+          {visibles.length === 0 && <li className={styles.aucun}>Aucun résultat</li>}
+          {visibles.map((option, i) => (
             <li
               key={String(option.value)}
               role="option"

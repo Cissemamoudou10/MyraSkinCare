@@ -62,7 +62,7 @@ export default function BrandsAdmin() {
       </div>
 
       {form && (
-        <div style={{ background: "#f9f9f9", padding: "1.5rem", borderRadius: "10px", marginBottom: "2rem" }}>
+        <div style={{ background: "#f9f9f9", padding: "1.5rem", marginBottom: "2rem" }}>
           <h2>{form.id ? "Modifier la marque" : "Nouvelle marque"}</h2>
           <form onSubmit={handleSave} style={{ display: "flex", gap: "1rem", alignItems: "flex-end", marginTop: "1rem" }}>
             <div style={{ flex: 1 }}>

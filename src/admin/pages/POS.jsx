@@ -2,7 +2,7 @@ import { urlImage } from "@/lib/images";
 import { useState, useEffect, useMemo } from "react";
 import { fetchAdminProduits, fetchAdminKits, creerVentePOS } from "@/lib/api";
 import { ShoppingBag, Search, Plus, Minus, Trash2, CheckCircle, Package } from "lucide-react";
-import Button from "@/components/ui/Button";
+import { formatPrice } from "@/data/products";
 import { useDialog } from "@/context/DialogContext";
 import styles from "./POS.module.css";
 import s from "../admin.module.css";
@@ -57,7 +57,7 @@ export default function POS() {
         });
       }
 
-      return { ...k, type: "kit", displayName: k.nom, displayPrice: prixFinal, stock: stockDispo };
+      return { ...k, type: "kit", displayName: k.nom, displayPrice: prixFinal, stock: stockDispo, photo: k.photo || k.produits?.find((p) => p.photo)?.photo };
     });
 
     const combined = [...prods, ...kts].filter(i => i.actif !== false);
@@ -163,7 +163,7 @@ export default function POS() {
             <Search size={16} className={styles.searchIcon} />
             <input 
               type="text" 
-              placeholder="Chercher un produit ou kit..." 
+              placeholder="Chercher un produit ou un kit" 
               value={search}
               onChange={e => setSearch(e.target.value)}
               className={styles.searchInput}
@@ -189,9 +189,9 @@ export default function POS() {
               <div className={styles.itemInfo}>
                 <h3 className={styles.itemName}>{item.displayName}</h3>
                 <div className={styles.itemPriceStock}>
-                  <span className={styles.itemPrice}>{item.displayPrice.toLocaleString("fr-FR")} FCFA</span>
+                  <span className={styles.itemPrice}>{formatPrice(item.displayPrice)}</span>
                   <span className={styles.itemStock}>
-                    {item.stock > 0 ? `${item.stock} dispo` : "Rupture"}
+                    {item.stock > 0 ? `Stock ${item.stock}` : "Rupture"}
                   </span>
                 </div>
               </div>
@@ -207,11 +207,11 @@ export default function POS() {
 
       {/* Partie Panier (Droite) */}
       <div className={styles.cartSection}>
-        <h2 className={styles.cartTitle}>Ticket de Caisse</h2>
+        <h2 className={styles.cartTitle}>Ticket de caisse</h2>
         
         {success ? (
           <div className={styles.successState}>
-            <CheckCircle size={48} color="var(--color-green)" />
+            <CheckCircle size={40} strokeWidth={1.2} color="var(--color-gold)" />
             <p>Paiement validé avec succès !</p>
           </div>
         ) : (
@@ -219,7 +219,7 @@ export default function POS() {
             <div className={styles.cartItems}>
               {cart.length === 0 ? (
                 <div className={styles.emptyCart}>
-                  <ShoppingBag size={32} />
+                  <ShoppingBag size={28} strokeWidth={1.2} />
                   <p>Le panier est vide</p>
                 </div>
               ) : (
@@ -227,7 +227,7 @@ export default function POS() {
                   <div key={`${item.type}-${item.id}`} className={styles.cartItemRow}>
                     <div className={styles.cartItemDetails}>
                       <span className={styles.cartItemName}>{item.nom}</span>
-                      <span className={styles.cartItemPrice}>{(item.prix_unitaire * item.quantite).toLocaleString("fr-FR")} FCFA</span>
+                      <span className={styles.cartItemPrice}>{formatPrice(item.prix_unitaire * item.quantite)}</span>
                     </div>
                     <div className={styles.cartItemActions}>
                       <button className={styles.qtyBtn} onClick={() => updateQuantity(item.id, item.type, -1)}><Minus size={14} /></button>
@@ -243,17 +243,16 @@ export default function POS() {
             <div className={styles.cartFooter}>
               <div className={styles.cartTotal}>
                 <span>Total à encaisser</span>
-                <span className={styles.totalValue}>{totalCart.toLocaleString("fr-FR")} FCFA</span>
+                <span className={styles.totalValue}>{formatPrice(totalCart)}</span>
               </div>
-              <Button 
-                variant="solid" 
-                style={{ width: '100%', padding: '16px' }} 
+              <button
+                type="button"
+                className={styles.encaisser}
                 disabled={cart.length === 0 || submitting}
-                isLoading={submitting}
                 onClick={handleCheckout}
               >
-                Valider l'encaissement
-              </Button>
+                {submitting ? "Encaissement…" : "Valider l'encaissement"}
+              </button>
             </div>
           </>
         )}

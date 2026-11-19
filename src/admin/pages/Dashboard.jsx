@@ -103,7 +103,7 @@ export default function Dashboard() {
       pdf.save(`myra_dashboard_${dateStr}.pdf`);
     } catch (err) {
       console.error("Erreur export PDF", err);
-      alert("Erreur lors de l'exportation PDF.");
+      console.error("Export PDF impossible");
     }
   };
 
@@ -129,18 +129,8 @@ export default function Dashboard() {
           <h1 className={styles.title}>Tableau de bord</h1>
           <p className={styles.subtitle}>Vue d'ensemble de l'activité Myra Skin Care</p>
         </div>
-        <button 
-          onClick={handleExportPDF}
-          style={{ 
-            display: 'flex', alignItems: 'center', gap: '8px', 
-            padding: '8px 16px', background: 'var(--color-ink)', 
-            color: 'var(--color-white)', border: 'none', borderRadius: '4px',
-            fontFamily: 'var(--font-sans)', fontSize: '12px', textTransform: 'uppercase', 
-            letterSpacing: '0.05em', cursor: 'pointer'
-          }}
-          data-html2canvas-ignore="true"
-        >
-          <Download size={14} /> Exporter (PDF)
+        <button onClick={handleExportPDF} className={styles.boutonSecondaire} data-html2canvas-ignore="true">
+          <Download size={13} strokeWidth={1.5} /> Exporter en PDF
         </button>
       </header>
 
@@ -162,38 +152,20 @@ export default function Dashboard() {
       </div>
 
       {/* Filtres de période pour les statistiques détaillées */}
-      <div style={{ marginTop: '2rem', padding: '1.5rem', background: 'rgba(250, 248, 244, 0.4)', border: '1px solid var(--color-line)', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap' }} data-html2canvas-ignore="true">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--color-ink)', fontWeight: 500 }}>
-          <Calendar size={18} /> Statistiques par période :
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <label style={{ fontSize: '12px', textTransform: 'uppercase' }}>Du</label>
-          <input 
-            type="date" 
-            value={debut} 
-            onChange={(e) => setDebut(e.target.value)}
-            style={{ padding: '8px', border: '1px solid var(--color-line)', borderRadius: '4px', fontFamily: 'var(--font-body)' }}
-          />
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <label style={{ fontSize: '12px', textTransform: 'uppercase' }}>Au</label>
-          <input 
-            type="date" 
-            value={fin} 
-            onChange={(e) => setFin(e.target.value)}
-            style={{ padding: '8px', border: '1px solid var(--color-line)', borderRadius: '4px', fontFamily: 'var(--font-body)' }}
-          />
-        </div>
-        <button 
-          onClick={loadStatsPeriode}
-          disabled={loadingStats}
-          style={{ 
-            padding: '8px 24px', background: 'var(--color-ink)', color: 'white', 
-            border: 'none', borderRadius: '4px', cursor: 'pointer',
-            fontFamily: 'var(--font-sans)', fontSize: '11px', textTransform: 'uppercase', letterSpacing: '0.1em'
-          }}
-        >
-          {loadingStats ? "Chargement..." : "Filtrer"}
+      <div className={styles.periode} data-html2canvas-ignore="true">
+        <p className={styles.periodeTitre}>
+          <Calendar size={15} strokeWidth={1.5} /> Statistiques par période
+        </p>
+        <label className={styles.periodeChamp}>
+          <span>Du</span>
+          <input type="date" value={debut} onChange={(e) => setDebut(e.target.value)} />
+        </label>
+        <label className={styles.periodeChamp}>
+          <span>Au</span>
+          <input type="date" value={fin} onChange={(e) => setFin(e.target.value)} />
+        </label>
+        <button onClick={loadStatsPeriode} disabled={loadingStats} className={styles.boutonPrincipal}>
+          {loadingStats ? "Chargement…" : "Afficher"}
         </button>
       </div>
 
@@ -245,7 +217,7 @@ export default function Dashboard() {
                 <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 11, fill: 'var(--color-grey)' }} />
                 <Tooltip 
                   formatter={(value) => [`${Number(value).toLocaleString('fr-FR')} FCFA`, 'Chiffre d\'Affaires']}
-                  contentStyle={{ backgroundColor: 'var(--color-ink)', color: 'var(--color-cream)', border: 'none', borderRadius: '4px', fontSize: '12px' }}
+                  contentStyle={{ backgroundColor: 'var(--color-ink)', color: 'var(--color-cream)', border: 'none', fontSize: '12px' }}
                   itemStyle={{ color: 'var(--color-cream)' }}
                 />
                 <Area type="monotone" dataKey="ventes" stroke="var(--color-ink)" fillOpacity={1} fill="url(#colorVentes)" strokeWidth={2} />
@@ -296,7 +268,7 @@ export default function Dashboard() {
                   fontFamily: 'var(--font-sans)', fontSize: '12px', fontWeight: 500,
                   color: p.stock === 0 ? 'var(--color-red)' : 'var(--color-gold)',
                   background: p.stock === 0 ? 'rgba(239, 68, 68, 0.1)' : 'rgba(234, 179, 8, 0.1)',
-                  padding: '4px 8px', borderRadius: '4px'
+                  padding: '4px 8px'
                 }}>
                   {p.stock === 0 ? 'Rupture' : `Reste: ${p.stock}`}
                 </span>

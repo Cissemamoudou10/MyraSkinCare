@@ -100,7 +100,7 @@ export default function ArticlesAdmin() {
                   required 
                   value={form.titre} 
                   onChange={(e) => setForm({...form, titre: e.target.value})} 
-                  style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--color-line)", borderRadius: "4px", fontFamily: "var(--font-body)", fontSize: "14px" }}
+                  style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--color-line)", fontFamily: "var(--font-body)", fontSize: "14px" }}
                 />
               </div>
               
@@ -129,11 +129,11 @@ export default function ArticlesAdmin() {
                   placeholder="https://..."
                   value={form.image_url || ""} 
                   onChange={(e) => setForm({...form, image_url: e.target.value})} 
-                  style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--color-line)", borderRadius: "4px", fontFamily: "var(--font-body)", fontSize: "14px" }}
+                  style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--color-line)", fontFamily: "var(--font-body)", fontSize: "14px" }}
                 />
               </div>
               {form.image_url && (
-                <div style={{ width: "45px", height: "45px", borderRadius: "4px", overflow: "hidden", flexShrink: 0, border: "1px solid var(--color-line)" }}>
+                <div style={{ width: "45px", height: "45px", overflow: "hidden", flexShrink: 0, border: "1px solid var(--color-line)" }}>
                   <img src={form.image_url} alt="Aperçu" style={{ width: "100%", height: "100%", objectFit: "cover" }} onError={(e) => e.target.style.display = 'none'} />
                 </div>
               )}
@@ -147,11 +147,11 @@ export default function ArticlesAdmin() {
                 required 
                 value={form.contenu} 
                 onChange={(e) => setForm({...form, contenu: e.target.value})} 
-                style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--color-line)", borderRadius: "4px", fontFamily: "var(--font-body)", fontSize: "14px", minHeight: "200px", resize: "vertical" }}
+                style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--color-line)", fontFamily: "var(--font-body)", fontSize: "14px", minHeight: "200px", resize: "vertical" }}
               />
             </div>
             
-            <div style={{ display: "flex", alignItems: "center", gap: "12px", background: "var(--color-white)", padding: "16px", borderRadius: "4px", border: "1px solid var(--color-line)" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "12px", background: "var(--color-white)", padding: "16px", border: "1px solid var(--color-line)" }}>
               <input 
                 type="checkbox" 
                 id="publieCheck"
@@ -165,10 +165,10 @@ export default function ArticlesAdmin() {
             </div>
 
             <div style={{ display: "flex", gap: "12px", justifyContent: "flex-end", marginTop: "8px" }}>
-              <button type="button" onClick={() => setForm(null)} style={{ padding: "12px 24px", background: "transparent", border: "1px solid var(--color-line)", borderRadius: "4px", cursor: "pointer", fontFamily: "var(--font-sans)", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+              <button type="button" onClick={() => setForm(null)} style={{ padding: "12px 24px", background: "transparent", border: "1px solid var(--color-line)", cursor: "pointer", fontFamily: "var(--font-sans)", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                 Annuler
               </button>
-              <button type="submit" style={{ padding: "12px 24px", background: "var(--color-ink)", color: "var(--color-cream)", border: "none", borderRadius: "4px", cursor: "pointer", fontFamily: "var(--font-sans)", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+              <button type="submit" style={{ padding: "12px 24px", background: "var(--color-ink)", color: "var(--color-cream)", border: "none", cursor: "pointer", fontFamily: "var(--font-sans)", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                 Enregistrer l'article
               </button>
             </div>
@@ -201,12 +201,12 @@ export default function ArticlesAdmin() {
                   <tr key={item.id}>
                     <td>
                       {item.image_url ? (
-                        <div style={{ width: "40px", height: "40px", borderRadius: "4px", overflow: "hidden" }}>
+                        <div style={{ width: "40px", height: "40px", overflow: "hidden" }}>
                           <img src={item.image_url} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                         </div>
                       ) : (
                         <div style={{ 
-                          width: "40px", height: "40px", borderRadius: "4px", 
+                          width: "40px", height: "40px", 
                           background: "linear-gradient(135deg, var(--color-cream) 0%, #e8e2d2 100%)",
                           border: "1px solid var(--color-line)"
                         }} />

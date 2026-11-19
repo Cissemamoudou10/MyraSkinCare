@@ -1,8 +1,10 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchAdminKits, creerKit, modifierKit, fetchAdminProduits } from "@/lib/api";
-import { ArrowLeft, Plus, Trash2, Save } from "lucide-react";
-import Button from "@/components/ui/Button";
+import { ArrowLeft, Plus, Trash2 } from "lucide-react";
+import Select from "@/components/ui/Select";
+import { formatPrice } from "@/data/products";
+import k from "./KitForm.module.css";
 import { useDialog } from "@/context/DialogContext";
 import styles from "./ProductForm.module.css";
 import s from "../admin.module.css";
@@ -28,7 +30,6 @@ export default function KitForm() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [allProducts, setAllProducts] = useState([]);
-  const [searchInputs, setSearchInputs] = useState({});
 
   useEffect(() => {
     const loadData = async () => {
@@ -78,10 +79,12 @@ export default function KitForm() {
     const newProds = [...form.produits];
     newProds.splice(index, 1);
     setForm({ ...form, produits: newProds });
-    const newSearchInputs = { ...searchInputs };
-    delete newSearchInputs[index];
-    setSearchInputs(newSearchInputs);
   };
+
+  const optionsProduits = allProducts.map((p) => ({
+    value: p.id,
+    label: p.marque ? `${p.nom} · ${p.marque.nom}` : p.nom,
+  }));
 
   const calculerPrixApercu = () => {
     const prix_plein = form.produits.reduce((acc, p) => {
@@ -150,7 +153,7 @@ export default function KitForm() {
             <ArrowLeft size={20} />
           </Link>
           <div>
-            <h1 className={styles.title}>{editing ? "Modifier le kit" : "Nouveau Kit"}</h1>
+            <h1 className={styles.title}>{editing ? "Modifier le kit" : "Nouveau kit"}</h1>
             <p className={styles.subtitle}>
               {editing ? "Ajustez les paramètres du kit." : "Créez un nouveau lot de produits."}
             </p>
@@ -161,7 +164,7 @@ export default function KitForm() {
       <form onSubmit={handleSubmit} className={styles.formLayout}>
         <div className={styles.mainCol}>
           <div className={styles.card}>
-            <h2 className={styles.sectionTitle}>Informations Générales</h2>
+            <h2 className={styles.sectionTitle}>Informations générales</h2>
             
             <div className={styles.field}>
               <label className={styles.label}>Nom du kit</label>
@@ -175,121 +178,67 @@ export default function KitForm() {
           </div>
 
           <div className={styles.card}>
-            <h2 className={styles.sectionTitle}>Produits Inclus</h2>
+            <h2 className={styles.sectionTitle}>Produits inclus</h2>
             
-            {form.produits.map((prod, index) => {
-              const selectedProduct = allProducts.find(p => p.id === parseInt(prod.produit_id));
-              const searchVal = searchInputs[index] !== undefined ? searchInputs[index] : (selectedProduct ? selectedProduct.nom : "");
-              
-              return (
-                <div key={index} style={{ display: "flex", gap: "12px", marginBottom: "12px", alignItems: "flex-end" }}>
-                  <div className={styles.field} style={{ flex: 2, position: "relative" }}>
-                    <label className={styles.label}>Produit</label>
-                    <input 
-                      type="text"
-                      className={styles.input}
-                      placeholder="Rechercher un produit..."
-                      value={searchVal}
-                      onChange={e => {
-                        setSearchInputs({ ...searchInputs, [index]: e.target.value });
-                        handleUpdateProduct(index, "produit_id", "");
-                      }}
-                      onFocus={() => {
-                        if (!searchInputs[index]) {
-                           setSearchInputs({ ...searchInputs, [index]: "" });
-                        }
-                      }}
-                      onBlur={() => {
-                         // Délai pour permettre le clic sur un élément de la liste
-                         setTimeout(() => {
-                           if (!prod.produit_id && selectedProduct) {
-                             setSearchInputs({ ...searchInputs, [index]: selectedProduct.nom });
-                           } else if (!prod.produit_id) {
-                             setSearchInputs({ ...searchInputs, [index]: undefined });
-                           }
-                         }, 200);
-                      }}
-                      required={!prod.produit_id}
-                    />
-                    
-                    {/* Liste déroulante des résultats */}
-                    {searchInputs[index] !== undefined && !prod.produit_id && (
-                      <ul style={{ 
-                        position: "absolute", top: "100%", left: 0, right: 0, zIndex: 10, 
-                        background: "white", border: "1px solid var(--color-line)", 
-                        borderRadius: "4px", maxHeight: "200px", overflowY: "auto", 
-                        listStyle: "none", padding: 0, margin: "4px 0 0 0", boxShadow: "0 4px 12px rgba(0,0,0,0.1)"
-                      }}>
-                        {allProducts
-                          .filter(p => p.nom.toLowerCase().includes((searchInputs[index] || "").toLowerCase()))
-                          .map(p => (
-                            <li 
-                              key={p.id} 
-                              onClick={() => {
-                                handleUpdateProduct(index, "produit_id", p.id);
-                                setSearchInputs({ ...searchInputs, [index]: p.nom });
-                              }}
-                              style={{ padding: "8px 12px", cursor: "pointer", borderBottom: "1px solid var(--color-line)", fontSize: "13px" }}
-                              onMouseEnter={e => e.target.style.background = "#f5f5f5"}
-                              onMouseLeave={e => e.target.style.background = "white"}
-                            >
-                              <div style={{ fontWeight: "500" }}>{p.nom}</div>
-                              <div style={{ fontSize: "11px", color: "var(--color-grey)" }}>{p.prix} FCFA • Stock: {p.stock}</div>
-                            </li>
-                          ))
-                        }
-                        {allProducts.filter(p => p.nom.toLowerCase().includes((searchInputs[index] || "").toLowerCase())).length === 0 && (
-                          <li style={{ padding: "8px 12px", fontSize: "13px", color: "var(--color-grey)" }}>Aucun produit trouvé.</li>
-                        )}
-                      </ul>
-                    )}
-                  </div>
-                  
-                  <div className={styles.field} style={{ flex: 1 }}>
-                    <label className={styles.label}>Quantité</label>
-                    <input 
-                      type="number" min="1" 
-                      value={prod.quantite} 
-                      className={styles.input}
-                      onChange={e => handleUpdateProduct(index, "quantite", e.target.value)}
-                      required
-                    />
-                  </div>
-                  <button type="button" onClick={() => handleRemoveProduct(index)} style={{ padding: "12px", background: "#fee2e2", color: "#dc2626", border: "none", borderRadius: "4px", cursor: "pointer", display: "flex", alignItems: "center" }}>
-                    <Trash2 size={16} />
-                  </button>
+            {form.produits.length === 0 && <p className={k.texte}>Aucun produit dans ce kit pour l'instant.</p>}
+            {form.produits.map((prod, index) => (
+              <div key={index} className={k.ligneProduit}>
+                <div className={styles.field}>
+                  <label className={styles.label}>Produit</label>
+                  <Select
+                    recherche
+                    required
+                    placeholder="Choisir un produit…"
+                    value={prod.produit_id}
+                    onChange={(v) => handleUpdateProduct(index, "produit_id", v)}
+                    options={optionsProduits}
+                  />
                 </div>
-              );
-            })}
+                <div className={styles.field}>
+                  <label className={styles.label}>Quantité</label>
+                  <input
+                    type="number"
+                    min="1"
+                    className={styles.input}
+                    value={prod.quantite}
+                    onChange={(e) => handleUpdateProduct(index, "quantite", e.target.value)}
+                    required
+                  />
+                </div>
+                <button type="button" className={k.retirer} onClick={() => handleRemoveProduct(index)} aria-label="Retirer ce produit">
+                  <Trash2 size={15} strokeWidth={1.5} />
+                </button>
+              </div>
+            ))}
 
-            <button type="button" onClick={handleAddProduct} style={{ display: "flex", alignItems: "center", gap: "8px", background: "none", border: "1px dashed var(--color-grey)", padding: "12px", width: "100%", justifyContent: "center", borderRadius: "4px", cursor: "pointer", marginTop: "16px", color: "var(--color-ink)" }}>
-              <Plus size={16} /> Ajouter un produit au kit
+            <button type="button" className={k.ajouterProduit} onClick={handleAddProduct}>
+              <Plus size={14} strokeWidth={1.5} /> Ajouter un produit
             </button>
           </div>
 
           <div className={styles.card}>
             <h2 className={styles.sectionTitle}>Promotion</h2>
-            <p style={{ fontSize: "12px", color: "var(--color-grey)", marginBottom: "16px" }}>Appliquez une réduction au prix total des produits inclus.</p>
+            <p className={k.texte}>Appliquez une réduction au prix total des produits inclus.</p>
 
-            <label className={styles.checkboxItem} style={{ marginBottom: "16px", fontWeight: 500 }}>
+            <label className={styles.checkboxItem}>
               <input type="checkbox" checked={form.promo_active} onChange={e => setForm({...form, promo_active: e.target.checked})} />
               Activer la promotion sur ce kit
             </label>
 
             {form.promo_active && (
-              <div style={{ background: "#f9f9f9", padding: "16px", borderRadius: "8px" }}>
+              <div className={k.promo}>
                 <div className={styles.field}>
                   <label className={styles.label}>Réduction (%)</label>
                   <input className={styles.input} type="number" min="0" max="100" value={form.reduction_pourcentage} onChange={e => setForm({...form, reduction_pourcentage: e.target.value})} required />
                 </div>
                 
-                <div style={{ display: "flex", gap: "16px", marginTop: "16px" }}>
-                  <div className={styles.field} style={{ flex: 1 }}>
-                    <label className={styles.label}>Début promo (Optionnel)</label>
+                <div className={styles.fieldGroup}>
+                  <div className={styles.field}>
+                    <label className={styles.label}>Début (optionnel)</label>
                     <input className={styles.input} type="date" value={form.promo_debut} onChange={e => setForm({...form, promo_debut: e.target.value})} />
                   </div>
-                  <div className={styles.field} style={{ flex: 1 }}>
-                    <label className={styles.label}>Fin promo (Optionnel)</label>
+                  <div className={styles.field}>
+                    <label className={styles.label}>Fin (optionnel)</label>
                     <input className={styles.input} type="date" value={form.promo_fin} onChange={e => setForm({...form, promo_fin: e.target.value})} />
                   </div>
                 </div>
@@ -301,43 +250,38 @@ export default function KitForm() {
         <div className={styles.sideCol}>
           <div className={styles.card}>
             <h3 className={styles.sectionTitle}>Aperçu du prix</h3>
-            <div style={{ padding: "16px", background: "var(--color-cream)", borderRadius: "8px", textAlign: "center" }}>
-              <div style={{ fontSize: "12px", color: "var(--color-grey)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "8px" }}>Valeur réelle</div>
-              <div style={{ fontSize: "18px", textDecoration: form.promo_active && form.reduction_pourcentage > 0 ? "line-through" : "none", color: "var(--color-grey)" }}>
-                {apercu.prix_plein} FCFA
-              </div>
-              
+            <div className={k.apercu}>
+              <p className={k.apercuLabel}>Valeur des produits</p>
+              <p className={form.promo_active && form.reduction_pourcentage > 0 ? k.prixBarre : k.prix}>
+                {formatPrice(apercu.prix_plein)}
+              </p>
               {form.promo_active && form.reduction_pourcentage > 0 && (
                 <>
-                  <div style={{ fontSize: "12px", color: "#d32f2f", textTransform: "uppercase", letterSpacing: "0.1em", marginTop: "16px", marginBottom: "8px" }}>Prix final (-{form.reduction_pourcentage}%)</div>
-                  <div style={{ fontSize: "24px", fontWeight: 500, color: "#d32f2f" }}>
-                    {apercu.prix_final} FCFA
-                  </div>
+                  <p className={k.apercuLabel}>Prix du kit (−{form.reduction_pourcentage} %)</p>
+                  <p className={k.prix}>{formatPrice(apercu.prix_final)}</p>
                 </>
               )}
             </div>
           </div>
 
           <div className={styles.card}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-              <h3 className={styles.sectionTitle} style={{ margin: 0 }}>Statut</h3>
+            <div className={k.statut}>
+              <h3 className={styles.sectionTitle}>Statut</h3>
               <label className={styles.switch}>
                 <input type="checkbox" checked={form.actif} onChange={e => setForm({...form, actif: e.target.checked})} />
                 <span className={styles.slider}></span>
               </label>
             </div>
-            <p style={{ fontSize: '12px', color: 'var(--color-grey)' }}>
+            <p className={k.texte}>
               {form.actif ? "Le kit est visible." : "Le kit est masqué."}
             </p>
           </div>
 
           <div className={styles.actions}>
             <Link to="/admin/kits" className={styles.btnCancel}>Annuler</Link>
-            <Button type="submit" variant="solid" isLoading={saving}>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
-                <Save size={16} strokeWidth={1.5} /> Enregistrer
-              </span>
-            </Button>
+            <button type="submit" className={styles.btnSubmit} disabled={saving}>
+              {saving ? "Enregistrement…" : "Enregistrer"}
+            </button>
           </div>
         </div>
       </form>

@@ -28,7 +28,7 @@ export default function Login() {
 
   return (
     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", backgroundColor: "var(--color-cream)" }}>
-      <div style={{ background: "white", padding: "3rem", borderRadius: "8px", width: "100%", maxWidth: "400px", boxShadow: "0 10px 30px rgba(0,0,0,0.05)" }}>
+      <div style={{ background: "white", padding: "3rem", width: "100%", maxWidth: "400px" }}>
         <h1 className={s.pageTitle} style={{ textAlign: "center", marginBottom: "2rem" }}>Myra Admin</h1>
         {error && <div style={{ color: "red", marginBottom: "1rem", textAlign: "center" }}>{error}</div>}
         <form onSubmit={handleSubmit} className={s.form}>

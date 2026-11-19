@@ -133,7 +133,7 @@ export default function ReferentialsAdmin() {
                 required 
                 value={form.nom} 
                 onChange={(e) => setForm({...form, nom: e.target.value})} 
-                style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--color-line)", borderRadius: "4px", fontFamily: "var(--font-body)", fontSize: "14px" }}
+                style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--color-line)", fontFamily: "var(--font-body)", fontSize: "14px" }}
               />
             </div>
             {/* Seules les marques ont une description dans notre DB, mais on peut le garder optionnel ou le cacher pour les autres */}
@@ -145,7 +145,7 @@ export default function ReferentialsAdmin() {
                 <input 
                   value={form.description || ""} 
                   onChange={(e) => setForm({...form, description: e.target.value})} 
-                  style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--color-line)", borderRadius: "4px", fontFamily: "var(--font-body)", fontSize: "14px" }}
+                  style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--color-line)", fontFamily: "var(--font-body)", fontSize: "14px" }}
                 />
               </div>
             )}
@@ -161,11 +161,11 @@ export default function ReferentialsAdmin() {
                     placeholder="https://..."
                     value={form.image_url || ""} 
                     onChange={(e) => setForm({...form, image_url: e.target.value})} 
-                    style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--color-line)", borderRadius: "4px", fontFamily: "var(--font-body)", fontSize: "14px" }}
+                    style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--color-line)", fontFamily: "var(--font-body)", fontSize: "14px" }}
                   />
                 </div>
                 {form.image_url && (
-                  <div style={{ width: "45px", height: "45px", borderRadius: "4px", overflow: "hidden", flexShrink: 0, border: "1px solid var(--color-line)" }}>
+                  <div style={{ width: "45px", height: "45px", overflow: "hidden", flexShrink: 0, border: "1px solid var(--color-line)" }}>
                     <img src={form.image_url} alt="Aperçu" style={{ width: "100%", height: "100%", objectFit: "cover" }} onError={(e) => e.target.style.display = 'none'} />
                   </div>
                 )}
@@ -197,7 +197,7 @@ export default function ReferentialsAdmin() {
                     type="number"
                     value={form.ordre ?? 0}
                     onChange={(e) => setForm({ ...form, ordre: e.target.value })}
-                    style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--color-line)", borderRadius: "4px", fontFamily: "var(--font-body)", fontSize: "14px" }}
+                    style={{ width: "100%", padding: "12px 16px", border: "1px solid var(--color-line)", fontFamily: "var(--font-body)", fontSize: "14px" }}
                   />
                 </div>
                 <div style={{ display: "flex", alignItems: "center", gap: "8px", paddingBottom: "12px" }}>
@@ -215,10 +215,10 @@ export default function ReferentialsAdmin() {
             )}
 
             <div style={{ display: "flex", gap: "12px" }}>
-              <button type="button" onClick={() => setForm(null)} style={{ padding: "12px 24px", background: "transparent", border: "1px solid var(--color-line)", borderRadius: "4px", cursor: "pointer", fontFamily: "var(--font-sans)", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+              <button type="button" onClick={() => setForm(null)} style={{ padding: "12px 24px", background: "transparent", border: "1px solid var(--color-line)", cursor: "pointer", fontFamily: "var(--font-sans)", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                 Annuler
               </button>
-              <button type="submit" style={{ padding: "12px 24px", background: "var(--color-ink)", color: "var(--color-cream)", border: "none", borderRadius: "4px", cursor: "pointer", fontFamily: "var(--font-sans)", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase" }}>
+              <button type="submit" style={{ padding: "12px 24px", background: "var(--color-ink)", color: "var(--color-cream)", border: "none", cursor: "pointer", fontFamily: "var(--font-sans)", fontSize: "11px", letterSpacing: "0.1em", textTransform: "uppercase" }}>
                 Enregistrer
               </button>
             </div>
@@ -253,12 +253,12 @@ export default function ReferentialsAdmin() {
                     {activeTab.id !== "principes-actifs" && (
                       <td>
                         {item.image_url ? (
-                          <div style={{ width: "32px", height: "32px", borderRadius: "4px", overflow: "hidden" }}>
+                          <div style={{ width: "32px", height: "32px", overflow: "hidden" }}>
                             <img src={item.image_url} alt={item.nom} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                           </div>
                         ) : (
                           <div style={{ 
-                            width: "32px", height: "32px", borderRadius: "4px", 
+                            width: "32px", height: "32px", 
                             background: "linear-gradient(135deg, var(--color-cream) 0%, #e8e2d2 100%)",
                             border: "1px solid var(--color-line)"
                           }} />

@@ -85,6 +85,26 @@ strong {
   font-weight: 500;
 }
 
+/* Par défaut le navigateur met titres et en-têtes de tableau en gras (700),
+   graisse absente de nos polices : il la simule (faux gras empâté). */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 400;
+}
+th {
+  font-weight: 500;
+}
+
+/* Cases à cocher et boutons radio aux couleurs du site (pas le bleu natif) */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--color-ink);
+}
+
 ::selection {
   background: var(--color-gold);
   color: var(--color-cream);

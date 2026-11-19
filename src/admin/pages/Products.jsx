@@ -64,14 +64,14 @@ export default function Products() {
             placeholder="Rechercher un produit..." 
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            style={{ padding: '8px 12px', border: '1px solid var(--color-line)', borderRadius: '4px', fontFamily: 'var(--font-body)', fontSize: '13px', width: '250px' }}
+            style={{ padding: '8px 12px', border: '1px solid var(--color-line)', fontFamily: 'var(--font-body)', fontSize: '13px', width: '250px' }}
           />
           <button 
             onClick={handleExportExcel}
             style={{ 
               display: 'flex', alignItems: 'center', gap: '8px', 
               padding: '8px 16px', background: 'var(--color-ink)', 
-              color: 'var(--color-white)', border: 'none', borderRadius: '4px',
+              color: 'var(--color-white)', border: 'none',
               fontFamily: 'var(--font-sans)', fontSize: '12px', textTransform: 'uppercase', 
               letterSpacing: '0.05em', cursor: 'pointer'
             }}
