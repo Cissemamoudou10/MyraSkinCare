@@ -96,19 +96,19 @@ export default function ReviewsAdmin() {
                 </tr>
               ) : reviews.map((a) => (
                 <tr key={a.id}>
-                  <td>
+                  <td data-label="Auteur">
                     <div className={styles.clientInfo}>
                       <span className={styles.clientName}>{a.nom}</span>
                       <span className={styles.clientContact}>{new Date(a.created_at).toLocaleDateString("fr-FR")}</span>
                     </div>
                   </td>
-                  <td>{renderStars(a.note)}</td>
-                  <td style={{ maxWidth: '300px', whiteSpace: 'normal', lineHeight: '1.4' }}>
+                  <td data-label="Note">{renderStars(a.note)}</td>
+                  <td style={{ maxWidth: '300px', whiteSpace: 'normal', lineHeight: '1.4' }} data-label="Commentaire">
                     "{a.texte}"
                   </td>
-                  <td>{a.commande?.lignes?.[0]?.produit?.nom || "Achat vérifié"}</td>
-                  <td>{getStatusDisplay(a.statut)}</td>
-                  <td className={styles.rightAlign}>
+                  <td data-label="Produit">{a.commande?.lignes?.[0]?.produit?.nom || "Achat vérifié"}</td>
+                  <td data-label="Statut">{getStatusDisplay(a.statut)}</td>
+                  <td className={styles.rightAlign} data-label="Actions">
                     <div className={styles.actions}>
                       {a.statut === "en_attente" && (
                         <>

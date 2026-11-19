@@ -95,7 +95,7 @@ export default function ReferentialsAdmin() {
       </header>
 
       {/* TABS */}
-      <div style={{ display: "flex", gap: "16px", borderBottom: "1px solid var(--color-line)", marginBottom: "24px" }}>
+      <div style={{ display: "flex", gap: "16px", borderBottom: "1px solid var(--color-line)", marginBottom: "24px", overflowX: "auto" }}>
         {TABS.map(tab => (
           <button
             key={tab.id}
@@ -251,7 +251,7 @@ export default function ReferentialsAdmin() {
                 ) : data.map((item) => (
                   <tr key={item.id}>
                     {activeTab.id !== "principes-actifs" && (
-                      <td>
+                      <td data-label="Illustration">
                         {item.image_url ? (
                           <div style={{ width: "32px", height: "32px", overflow: "hidden" }}>
                             <img src={item.image_url} alt={item.nom} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
@@ -265,16 +265,16 @@ export default function ReferentialsAdmin() {
                         )}
                       </td>
                     )}
-                    <td className={styles.fw500}>{item.nom}</td>
-                    {activeTab.id === "marques" && <td>{item.description || "-"}</td>}
+                    <td className={styles.fw500} data-label="Nom">{item.nom}</td>
+                    {activeTab.id === "marques" && <td data-label="Description">{item.description || "-"}</td>}
                     {activeTab.id === "categories" && (
-                      <td>{data.find((c) => c.id === item.parent_id)?.nom || "—"}</td>
+                      <td data-label="Rubrique parente">{data.find((c) => c.id === item.parent_id)?.nom || "—"}</td>
                     )}
-                    {activeTab.id === "categories" && <td>{item.ordre ?? 0}</td>}
+                    {activeTab.id === "categories" && <td data-label="Ordre">{item.ordre ?? 0}</td>}
                     {activeTab.id === "categories" && (
-                      <td>{item.affiche_menu === false ? "Masqué" : "Visible"}</td>
+                      <td data-label="Menu">{item.affiche_menu === false ? "Masqué" : "Visible"}</td>
                     )}
-                    <td className={styles.rightAlign}>
+                    <td className={styles.rightAlign} data-label="Actions">
                       <div className={styles.actions}>
                         <button onClick={() => setForm(item)} className={styles.btnIcon} title="Modifier">
                           <Edit2 size={16} />

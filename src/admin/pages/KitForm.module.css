@@ -90,3 +90,15 @@
 .statut h3 {
   margin: 0;
 }
+
+/* Téléphone : le produit prend toute la ligne, quantité et suppression dessous */
+@media (max-width: 640px) {
+  .ligneProduit {
+    grid-template-columns: minmax(0, 1fr) 44px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .ligneProduit > :first-child {
+    grid-column: 1 / -1;
+  }
+}

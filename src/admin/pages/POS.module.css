@@ -345,3 +345,32 @@
     width: 100%;
   }
 }
+
+/* Téléphone : deux produits par ligne, inventaire plus court pour voir le ticket */
+@media (max-width: 640px) {
+  .header,
+  .cartTitle,
+  .cartFooter {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .cartItems {
+    padding: 4px 16px;
+  }
+  .itemsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding: 14px 16px 16px;
+  }
+  .inventorySection {
+    max-height: 62vh;
+  }
+  .itemInfo {
+    padding: 8px 10px 10px;
+  }
+  .itemPriceStock {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+}

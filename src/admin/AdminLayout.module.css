@@ -233,3 +233,27 @@
   opacity: 0.45;
   cursor: pointer;
 }
+
+/* Téléphone : les en-têtes de page (titre + recherche + bouton) passent
+   sur plusieurs lignes au lieu de déborder de l'écran. Les !important
+   l'emportent sur les largeurs fixes écrites en ligne dans les pages. */
+@media (max-width: 640px) {
+  .main header {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 16px;
+  }
+  .main header > div {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .main header input {
+    flex: 1 1 100%;
+    width: 100% !important;
+    min-width: 0;
+  }
+  .main header > button,
+  .main header > a {
+    align-self: flex-start;
+  }
+}

@@ -199,7 +199,7 @@ export default function ArticlesAdmin() {
                   </tr>
                 ) : articles.map((item) => (
                   <tr key={item.id}>
-                    <td>
+                    <td data-label="Image">
                       {item.image_url ? (
                         <div style={{ width: "40px", height: "40px", overflow: "hidden" }}>
                           <img src={item.image_url} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
@@ -212,9 +212,9 @@ export default function ArticlesAdmin() {
                         }} />
                       )}
                     </td>
-                    <td className={styles.fw500}>{item.titre}</td>
-                    <td style={{ textTransform: "capitalize" }}>{item.type}</td>
-                    <td>
+                    <td className={styles.fw500} data-label="Titre">{item.titre}</td>
+                    <td style={{ textTransform: "capitalize" }} data-label="Type">{item.type}</td>
+                    <td data-label="Statut">
                       {item.publie ? (
                          <span style={{ color: "var(--color-green)", display: "flex", alignItems: "center", gap: "4px", fontSize: "12px" }}>
                            <CheckCircle size={12} /> Publié
@@ -225,10 +225,10 @@ export default function ArticlesAdmin() {
                          </span>
                       )}
                     </td>
-                    <td style={{ fontSize: "12px", color: "var(--color-grey)" }}>
+                    <td style={{ fontSize: "12px", color: "var(--color-grey)" }} data-label="Date">
                       {new Date(item.createdAt).toLocaleDateString("fr-FR")}
                     </td>
-                    <td className={styles.rightAlign}>
+                    <td className={styles.rightAlign} data-label="Actions">
                       <div className={styles.actions}>
                         <button onClick={() => setForm(item)} className={styles.btnIcon} title="Modifier">
                           <Edit2 size={16} />
